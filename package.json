@@ -1,0 +1,28 @@
+{
+	"author": {
+		"name": "Mikael 'Lilleman' Göransson",
+		"email": "lilleman@larvit.se",
+		"url": "http://github.com/larvit/larvitutils"
+	},
+	"private": false,
+	"contributors": [],
+	"dependencies": {},
+	"description": "Misc utilites",
+	"devDependencies": {},
+	"keywords": [
+		"misc"
+	],
+	"main": "larvitutils.js",
+	"name": "larvitutils",
+	"repository": {
+		"url": "https://github.com/larvit/larvitutils",
+		"type": "git"
+	},
+	"version": "0.0.1beta",
+	"bugs": {
+		"url": "https://github.com/larvit/larvitutils/issues"
+	},
+	"homepage": "https://github.com/larvit/larvitutils",
+	"scripts": {},
+	"readme": "Misc utilities"
+}
