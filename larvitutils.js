@@ -51,11 +51,11 @@ exports.getPartialData = function(request, callback) {
 			};
 
 			if (err) {
-				callback(err);
+				callback(err, request, response, returnData);
 				return;
 			}
 
-			callback(null, returnData);
+			callback(null, request, response, returnData);
 		});
 	});
 };
