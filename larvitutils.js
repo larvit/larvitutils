@@ -18,18 +18,17 @@ exports.hrtimeToMs = function(prevTime, precision) {
 };
 
 /**
- * Get JSON data from an URL and format it for partial rendering in larvit framework
+ * Get JSON data from an internal URL and format it for partial rendering in larvit framework
  *
- * @param str url - local to this server
+ * @param obj request - created request object
  * @param func callback(err, obj)
  */
-exports.getPartialData = function(url, callback) {
+exports.getPartialData = function(request, callback) {
 	var router  = require('larvitrouter')(),
-	    tmpReq  = {'url': url}, // Simulate a request object
 	    path    = require('path'),
 	    appPath = path.dirname(require.main.filename);
 
-	router.resolve(tmpReq, function(err) {
+	router.resolve(request, function(err) {
 		var controller;
 
 		if (err) {
@@ -37,17 +36,17 @@ exports.getPartialData = function(url, callback) {
 			return;
 		}
 
-		if (tmpReq.controllerName === undefined) {
-			err = new Error('No controller name resolved for API partial data call: "' + url + '"');
+		if (request.controllerName === undefined) {
+			err = new Error('No controller name resolved for API partial data call: "' + request.url + '"');
 			callback(err);
 			return;
 		}
 
-		controller = require(path.join(appPath, '/controllers', url));
+		controller = require(path.join(appPath, '/controllers', request.url));
 
-		controller.run(tmpReq, {}, function(err, request, response, data) {
+		controller.run(request, {}, function(err, request, response, data) {
 			var returnData = {
-				'url': url,
+				'url': request.url,
 				'data': data
 			};
 
