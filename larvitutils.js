@@ -42,7 +42,7 @@ exports.getPartialData = function(request, callback) {
 			return;
 		}
 
-		controller = require(path.join(appPath, '/controllers', request.url));
+		controller = require(path.join(appPath, '/controllers', request.urlParsed.pathname));
 
 		controller.run(request, {}, function(err, request, response, data) {
 			var returnData = {
