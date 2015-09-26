@@ -7,7 +7,14 @@
 	"private": false,
 	"dependencies": {},
 	"description": "Misc utilites",
-	"devDependencies": {},
+	"devDependencies": {
+		"mocha": "latest",
+		"pre-git": "latest"
+	},
+	"pre-commit": [
+		"npm test",
+		"eslint ./"
+	],
 	"keywords": [
 		"misc"
 	],
@@ -17,17 +24,20 @@
 		"url": "https://github.com/larvit/larvitutils",
 		"type": "git"
 	},
-	"version": "0.0.5beta",
+	"version": "0.1.0",
 	"bugs": {
 		"url": "https://github.com/larvit/larvitutils/issues"
 	},
 	"homepage": "https://github.com/larvit/larvitutils",
-	"scripts": {},
+	"scripts": {
+		"test": "mocha"
+	},
 	"maintainers": [
 		{
 			"name": "lilleman",
 			"email": "lilleman@larvit.se"
 		}
 	],
-	"readme": "No readme data found"
+	"readme": "No readme data found",
+	"licese": "MIT"
 }

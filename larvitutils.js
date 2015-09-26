@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Convert hrtime to milliseconds
+ * Convert hrtime diff to milliseconds
  *
  * @param arr prevTime - the output from process.hrtime() to diff to
  * @param int precision - defaults to 2
- * @return float - time diff in milliseconrds rounded to given precision
+ * @return string - time diff in milliseconds rounded to given precision
  */
 exports.hrtimeToMs = function(prevTime, precision) {
 	var diff = process.hrtime(prevTime);
@@ -15,47 +15,4 @@ exports.hrtimeToMs = function(prevTime, precision) {
 	}
 
 	return (diff[0] * 1000 + (diff[1] / 1000000)).toFixed(precision);
-};
-
-/**
- * Get JSON data from an internal URL and format it for partial rendering in larvit framework
- *
- * @param obj request - created request object
- * @param func callback(err, obj)
- */
-exports.getPartialData = function(request, callback) {
-	var router  = require('larvitrouter')(),
-	    path    = require('path'),
-	    appPath = path.dirname(require.main.filename);
-
-	router.resolve(request, function(err) {
-		var controller;
-
-		if (err) {
-			callback(err);
-			return;
-		}
-
-		if (request.controllerName === undefined) {
-			err = new Error('No controller name resolved for API partial data call: "' + request.url + '"');
-			callback(err);
-			return;
-		}
-
-		controller = require(path.join(appPath, '/controllers', request.urlParsed.pathname));
-
-		controller.run(request, {}, function(err, request, response, data) {
-			var returnData = {
-				'url': request.url,
-				'data': data
-			};
-
-			if (err) {
-				callback(err, request, response, returnData);
-				return;
-			}
-
-			callback(null, request, response, returnData);
-		});
-	});
 };
