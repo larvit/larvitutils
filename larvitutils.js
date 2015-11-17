@@ -1,21 +1,6 @@
 'use strict';
 
 /**
- * Convert a buffer to an uuid string
- *
- * @param buffer buffer
- *
- * @return str
- */
-exports.bufferToUuid = function(buffer) {
-	var str = buffer.toString('hex');
-
-	str = str.substring(0, 8) + '-' + str.substring(8, 12) + '-' + str.substring(12, 16) + '-' + str.substring(16, 20) + '-' + str.substring(20);
-
-	return str;
-};
-
-/**
  * Convert hrtime diff to milliseconds
  *
  * @param arr prevTime - the output from process.hrtime() to diff to
@@ -39,7 +24,7 @@ exports.hrtimeToMs = function(prevTime, precision) {
  * @param str uuidStr - Can also take a buffer
  * @return str uuid string or false on failure
  */
-exports.formatUuidStr = function(uuidStr) {
+exports.formatUuid = function(uuidStr) {
 
 	// If a buffer, get the string representation
 	if (Buffer.isBuffer(uuidStr))
@@ -60,4 +45,21 @@ exports.formatUuidStr = function(uuidStr) {
 	uuidStr = uuidStr.substring(0, 8) + '-' + uuidStr.substring(8, 12) + '-' + uuidStr.substring(12, 16) + '-' + uuidStr.substring(16, 20) + '-' + uuidStr.substring(20);
 
 	return uuidStr;
+};
+
+/**
+ * Make a buffer from an uuid string
+ *
+ * @param str uuidStr - Can be with or without dashes, padded spaces etc will be trimmed
+ * @return buffer or false on fail
+ */
+exports.uuidToBuffer = function(uuidStr) {
+	// Remove all but hex characters
+	uuidStr = uuidStr.replace(/[^A-Fa-f0-9]/g, '');
+
+	// All uuid strings have exactly 32 hex characters!
+	if (uuidStr.length !== 32)
+		return false;
+
+	return new Buffer(uuidStr, 'hex');
 };

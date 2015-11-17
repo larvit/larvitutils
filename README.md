@@ -8,7 +8,7 @@ Misc utilities
 
 ```javascript
 var utils = require('larvitutils'),
-    uuid  = utils.formatUuidStr(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
+    uuid  = utils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
@@ -19,7 +19,7 @@ Example usecase: fetch a binary column from a database and convert to a readable
 
 ```javascript
 var utils = require('larvitutils'),
-    uuid  = utils.formatUuidStr(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
+    uuid  = utils.formatUuid(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
@@ -38,3 +38,12 @@ setTimeout(function() {
 	console.log('benchmark took %d ms', utils.hrtimeToMs(startTime, 4));
 	// benchmark took 34.0005 ms
 }, 34);
+
+## Uuid string to buffer
+
+```javascript
+var utils   = require('larvitutils'),
+    uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
+
+utils.uuidToBuffer(uuidStr); // Will return a buffer
+```
