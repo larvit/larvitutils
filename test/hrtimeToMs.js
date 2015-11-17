@@ -3,7 +3,7 @@
 var assert = require('assert'),
     utils  = require('../larvitutils');
 
-describe('HrtimeToMs', function() {
+describe('hrtimeToMs', function() {
 	it('Test default amount of decimals', function(done) {
 		var res = utils.hrtimeToMs(process.hrtime());
 		assert.deepEqual(typeof res, 'string', 'res should be a string, but returned as ' + typeof res + ' and its value is ' + res);
