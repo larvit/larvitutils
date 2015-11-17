@@ -8,12 +8,21 @@ Misc utilities
 
 ```javascript
 var utils = require('larvitutils'),
-    uuid  = utils.bufferToUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
+    uuid  = utils.formatUuidStr(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
 
 Example usecase: fetch a binary column from a database and convert to a readable Uuid string
+
+## Format a hex string to uuid
+
+```javascript
+var utils = require('larvitutils'),
+    uuid  = utils.formatUuidStr(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
+
+console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
+```
 
 ## hrtimeToMs()
 
