@@ -38,6 +38,7 @@ setTimeout(function() {
 	console.log('benchmark took %d ms', utils.hrtimeToMs(startTime, 4));
 	// benchmark took 34.0005 ms
 }, 34);
+```
 
 ## Uuid string to buffer
 
@@ -47,5 +48,3 @@ var utils   = require('larvitutils'),
 
 utils.uuidToBuffer(uuidStr); // Will return a buffer
 ```
-
-More to come...
