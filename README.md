@@ -47,3 +47,5 @@ var utils   = require('larvitutils'),
 
 utils.uuidToBuffer(uuidStr); // Will return a buffer
 ```
+
+More to come...
