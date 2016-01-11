@@ -33,9 +33,17 @@ describe('formatUuid', function() {
 		    toShortHex = utils.formatUuid('62be934b24c2494981c40d4163e3bc9'),
 		    toLongHex  = utils.formatUuid('62be934b24c24944981c40d4163e3bc93');
 
-		assert(blaj === false, 'Expected false but got "' + blaj + '"');
+		assert(blaj       === false, 'Expected false but got "' + blaj + '"');
 		assert(toShortHex === false, 'Expected false but got "' + toShortHex + '"');
-		assert(toLongHex === false, 'Expected false but got "' + toLongHex + '"');
+		assert(toLongHex  === false, 'Expected false but got "' + toLongHex + '"');
+
+		done();
+	});
+
+	it('Should format a upper case string to lower case', function(done) {
+		var formatted = utils.formatUuid('80D7B01D-E5D8-43A4-B5F1-E2703506860A');
+
+		assert(formatted === '80d7b01d-e5d8-43a4-b5f1-e2703506860a', 'Expected "80d7b01d-e5d8-43a4-b5f1-e2703506860a" but got "' + formatted + '"');
 
 		done();
 	});

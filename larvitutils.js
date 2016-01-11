@@ -35,7 +35,7 @@ exports.formatUuid = function(uuidStr) {
 		return false;
 
 	// Remove all but hex characters
-	uuidStr = uuidStr.replace(/[^A-Fa-f0-9]/g, '');
+	uuidStr = uuidStr.replace(/[^A-Fa-f0-9]/g, '').toLowerCase();
 
 	// All uuid strings have exactly 32 hex characters!
 	if (uuidStr.length !== 32)
