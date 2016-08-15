@@ -7,8 +7,8 @@
  * @param int precision - defaults to 2
  * @return string - time diff in milliseconds rounded to given precision
  */
-exports.hrtimeToMs = function(prevTime, precision) {
-	var diff = process.hrtime(prevTime);
+function hrtimeToMs(prevTime, precision) {
+	const	diff	= process.hrtime(prevTime);
 
 	if (precision === undefined) {
 		precision = 2;
@@ -17,6 +17,10 @@ exports.hrtimeToMs = function(prevTime, precision) {
 	return (diff[0] * 1000 + (diff[1] / 1000000)).toFixed(precision);
 };
 
+function escapeRegExp(str) {
+	return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+
 /**
  * Formats an uuid string
  * For example adds missing "-", trimming spaces etc
@@ -24,7 +28,7 @@ exports.hrtimeToMs = function(prevTime, precision) {
  * @param str uuidStr - Can also take a buffer
  * @return str uuid string or false on failure
  */
-exports.formatUuid = function(uuidStr) {
+function formatUuid(uuidStr) {
 
 	// If a buffer, get the string representation
 	if (Buffer.isBuffer(uuidStr))
@@ -48,12 +52,25 @@ exports.formatUuid = function(uuidStr) {
 };
 
 /**
+ * Replace all occurances of a string in a string and return the result
+ *
+ * @param	str	search
+ * @param	str	replace
+ * @param	str	str
+ *
+ * @return str
+ */
+function replaceAll(search, replace, str) {
+	return str.replace(new RegExp(escapeRegExp(search), 'g'), replace);
+}
+
+/**
  * Make a buffer from an uuid string
  *
  * @param str uuidStr - Can be with or without dashes, padded spaces etc will be trimmed
  * @return buffer or false on fail
  */
-exports.uuidToBuffer = function(uuidStr) {
+function uuidToBuffer(uuidStr) {
 	// Remove all but hex characters
 	uuidStr = uuidStr.replace(/[^A-Fa-f0-9]/g, '');
 
@@ -63,3 +80,8 @@ exports.uuidToBuffer = function(uuidStr) {
 
 	return new Buffer(uuidStr, 'hex');
 };
+
+exports.hrtimeToMs	= hrtimeToMs;
+exports.formatUuid	= formatUuid;
+exports.replaceAll	= replaceAll;
+exports.uuidToBuffer	= uuidToBuffer;

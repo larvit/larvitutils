@@ -7,8 +7,8 @@ Misc utilities
 ## Convert a buffer to an Uuid
 
 ```javascript
-var utils = require('larvitutils'),
-    uuid  = utils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
+const	utils	= require('larvitutils'),
+	uuid	= utils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
@@ -18,8 +18,8 @@ Example usecase: fetch a binary column from a database and convert to a readable
 ## Format a hex string to uuid
 
 ```javascript
-var utils = require('larvitutils'),
-    uuid  = utils.formatUuid(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
+const	utils	= require('larvitutils'),
+	uuid	= utils.formatUuid(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
@@ -31,8 +31,8 @@ Used to convert hrtime() calls to milliseconds, since hrtime() output is messy (
 Usage:
 
 ```javascript
-var utils     = require('larvitutils'),
-    startTime = process.hrtime();
+const	utils	= require('larvitutils'),
+	startTime	= process.hrtime();
 
 setTimeout(function() {
 	console.log('benchmark took %d ms', utils.hrtimeToMs(startTime, 4));
@@ -43,8 +43,17 @@ setTimeout(function() {
 ## Uuid string to buffer
 
 ```javascript
-var utils   = require('larvitutils'),
-    uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
+const	utils	= require('larvitutils'),
+	uuidStr	= 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 
 utils.uuidToBuffer(uuidStr); // Will return a buffer
+```
+
+## Replace all for strings
+
+```javascript
+const	utils	= require('larvitutils'),
+	str	= 'f9684592-b245-42fa-88c6-9f16b9236ac3';
+
+utils.replaceAll('-', '_', str); // f9684592b24542fa88c69f16b9236ac3
 ```

@@ -1,52 +1,27 @@
 {
-  "author": {
-    "name": "Mikael 'Lilleman' Göransson",
-    "email": "lilleman@larvit.se",
-    "url": "http://github.com/larvit/larvitutils"
-  },
-  "private": false,
-  "dependencies": {},
-  "description": "Misc utilites",
-  "devDependencies": {
-    "mocha": "^2.4.5",
-    "pre-git": "^3.8.1"
-  },
-  "pre-commit": [
-    "npm test",
-    "eslint ./"
-  ],
-  "keywords": [
-    "misc"
-  ],
-  "main": "larvitutils.js",
   "name": "larvitutils",
-  "repository": {
-    "url": "https://github.com/larvit/larvitutils",
-    "type": "git"
+  "version": "1.0.0",
+  "description": "Misc utils",
+  "main": "index.js",
+  "devDependencies": {
+    "mocha": "^3.0.2"
   },
-  "version": "0.4.4",
-  "bugs": {
-    "url": "https://github.com/larvit/larvitutils/issues"
-  },
-  "homepage": "https://github.com/larvit/larvitutils",
   "scripts": {
     "test": "mocha"
   },
-  "maintainers": [
-    {
-      "name": "lilleman",
-      "email": "lilleman@larvit.se"
-    }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larvit/larvitutils.git"
+  },
+  "keywords": [
+    "misc",
+    "uuid",
+    "replaceAll"
   ],
-  "readme": "No readme data found",
-  "license": "MIT",
-  "config": {
-    "pre-git": {
-      "commit-msg": [],
-      "pre-commit": [],
-      "pre-push": [],
-      "post-commit": [],
-      "post-merge": []
-    }
-  }
+  "author": "lillem4n <lilleman@larvit.se>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larvit/larvitutils/issues"
+  },
+  "homepage": "https://github.com/larvit/larvitutils#readme"
 }
