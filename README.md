@@ -57,3 +57,18 @@ const	utils	= require('larvitutils'),
 
 utils.replaceAll('-', '_', str); // f9684592_b245_42fa_88c6_9f16b9236ac3
 ```
+
+## Validate an uuid string
+
+```javascript
+const	utils	= require('larvitutils'),
+	validUuid	= 'f9684592-b245-42fa-88c6-9f16b9236ac3',
+	invalidUuid1	= false,
+	invalidUuid2	= 'foobar',
+	invalidUuid3	= {'höhö': 'oveboll'};
+
+utils.formatUuid(validUuid);	// true
+utils.formatUuid(invalidUuid1);	// false
+utils.formatUuid(invalidUuid2);	// false
+utils.formatUuid(invalidUuid3);	// false
+```
