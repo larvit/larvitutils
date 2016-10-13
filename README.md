@@ -46,7 +46,7 @@ setTimeout(function() {
 const	utils	= require('larvitutils'),
 	uuidStr	= 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 
-utils.uuidToBuffer(uuidStr); // Will return a buffer
+utils.uuidToBuffer(uuidStr); // Will return a buffer or false on failure
 ```
 
 ## Replace all for strings
