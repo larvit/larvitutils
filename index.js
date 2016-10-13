@@ -84,7 +84,8 @@ function uuidToBuffer(uuidStr) {
 	return new Buffer(uuidStr, 'hex');
 };
 
-exports.hrtimeToMs	= hrtimeToMs;
 exports.formatUuid	= formatUuid;
+exports.hrtimeToMs	= hrtimeToMs;
+exports.instances	= {};
 exports.replaceAll	= replaceAll;
 exports.uuidToBuffer	= uuidToBuffer;

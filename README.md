@@ -72,3 +72,29 @@ utils.formatUuid(invalidUuid1);	// false
 utils.formatUuid(invalidUuid2);	// false
 utils.formatUuid(invalidUuid3);	// false
 ```
+
+## Instances
+
+Just a very simple object intended to keep instances of objects across moduels.
+
+file 1:
+```javascript
+const	utils	= require('larvitutils');
+
+let foo;
+
+function Foo() {}
+
+foo = new Foo();
+foo.bar = 'baz';
+
+utils.instances.foo = foo;
+```
+
+file 2:
+```javascript
+const	utils	= require('larvitutils'),
+	foo	= utils.instances.foo;
+
+console.log(foo.bar); // 'baz'
+```
