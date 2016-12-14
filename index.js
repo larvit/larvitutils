@@ -84,8 +84,25 @@ function uuidToBuffer(uuidStr) {
 	return new Buffer(uuidStr, 'hex');
 };
 
+/**
+ * Check if input is an int
+ *
+ * @param	mixed	Value to check
+ * @return	Boolean
+ */
+function isInt(value) {
+	const x = parseFloat(value);
+
+	if (isNaN(value)) {
+		return false;
+	}
+
+	return (x | 0) === x;
+}
+
 exports.formatUuid	= formatUuid;
 exports.hrtimeToMs	= hrtimeToMs;
 exports.instances	= {};
 exports.replaceAll	= replaceAll;
 exports.uuidToBuffer	= uuidToBuffer;
+exports.isInt = isInt;

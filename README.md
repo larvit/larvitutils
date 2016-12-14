@@ -73,6 +73,16 @@ utils.formatUuid(invalidUuid2);	// false
 utils.formatUuid(invalidUuid3);	// false
 ```
 
+## Check if input is an int
+```javascript
+const	utils	= require('larvitutils');
+
+utils.isInt(10); // true
+utils.isInt(10.0); // true
+utils.isInt(10.5); // false
+utils.isInt('oveboll'); // false
+```
+
 ## Instances
 
 Just a very simple object intended to keep instances of objects across moduels.
