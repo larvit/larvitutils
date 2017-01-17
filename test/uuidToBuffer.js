@@ -1,7 +1,10 @@
 'use strict';
 
 const	assert	= require('assert'),
-	utils	= require(__dirname + '/../index.js');
+	utils	= require(__dirname + '/../index.js'),
+	log	= require('winston');
+
+log.remove(log.transports.Console);
 
 describe('uuidToBuffer', function() {
 	it('Should convert an Uuid string to a buffer', function(done) {
@@ -18,6 +21,14 @@ describe('uuidToBuffer', function() {
 			uuidBuf	= utils.uuidToBuffer(uuidStr);
 
 		assert(uuidBuf === false, 'uuidBuf should be false, but is "' + uuidBuf + '"');
+
+		done();
+	});
+
+	it('Should fail to convert a non-string', function(done) {
+		assert.deepEqual(utils.uuidToBuffer({'foo': 'bar'}),	false);
+		assert.deepEqual(utils.uuidToBuffer(undefined),	false);
+		assert.deepEqual(utils.uuidToBuffer(null),	false);
 
 		done();
 	});

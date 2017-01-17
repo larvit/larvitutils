@@ -1,5 +1,7 @@
 'use strict';
 
+const	log	= require('winston');
+
 /**
  * Convert hrtime diff to milliseconds
  *
@@ -74,12 +76,19 @@ function replaceAll(search, replace, str) {
  * @return buffer or false on fail
  */
 function uuidToBuffer(uuidStr) {
+	if (typeof uuidStr !== 'string') {
+		log.warn('larvitutils: index.js - uuidToBuffer() - uuidStr is not a string, but a ' + (typeof uuidStr));
+		return false;
+	}
+
 	// Remove all but hex characters
 	uuidStr = uuidStr.replace(/[^A-Fa-f0-9]/g, '');
 
 	// All uuid strings have exactly 32 hex characters!
-	if (uuidStr.length !== 32)
+	if (uuidStr.length !== 32) {
+		log.warn('larvitutils: index.js - uuidToBuffer() - uuidStr should be exactly 32 characters after regex, but is: ' + uuidStr.length);
 		return false;
+	}
 
 	return new Buffer(uuidStr, 'hex');
 };
