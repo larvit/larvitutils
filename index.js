@@ -1,6 +1,7 @@
 'use strict';
 
-const	log	= require('winston');
+const	topLogPrefix	 = 'larvitutils: index.js: ',
+	log	= require('winston');
 
 /**
  * Convert hrtime diff to milliseconds
@@ -76,8 +77,12 @@ function replaceAll(search, replace, str) {
  * @return buffer or false on fail
  */
 function uuidToBuffer(uuidStr) {
+	const	logPrefix	 = topLogPrefix + 'uuidToBuffer() - ';
+
 	if (typeof uuidStr !== 'string') {
-		log.warn('larvitutils: index.js - uuidToBuffer() - uuidStr is not a string, but a ' + (typeof uuidStr));
+		const	stack	= new Error().stack;
+		log.warn(logPrefix + 'uuidStr is not a string, but a ' + (typeof uuidStr));
+		log.verbose(logPrefix + stack);
 		return false;
 	}
 
@@ -86,7 +91,9 @@ function uuidToBuffer(uuidStr) {
 
 	// All uuid strings have exactly 32 hex characters!
 	if (uuidStr.length !== 32) {
-		log.warn('larvitutils: index.js - uuidToBuffer() - uuidStr should be exactly 32 characters after regex, but is: ' + uuidStr.length);
+		const	stack	= new Error().stack;
+		log.warn(logPrefix + 'uuidStr should be exactly 32 characters after regex, but is: ' + uuidStr.length);
+		log.verbose(logPrefix + stack);
 		return false;
 	}
 

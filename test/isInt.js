@@ -8,7 +8,7 @@ describe('isInt', function() {
 		const	input	= 'string',
 			checkedInt	= utils.isInt(input);
 
-		assert.deepEqual(checkedInt, false, 'Should return false if input is a string, but returned true.');
+		assert.strictEqual(checkedInt,	false,	'Should return false if input is a string, but returned true.');
 
 		done();
 	});
@@ -17,7 +17,7 @@ describe('isInt', function() {
 		const	input	= function() {},
 			checkedInt	= utils.isInt(input);
 
-		assert.deepEqual(checkedInt, false, 'Should return false if input is a function, but returned true.');
+		assert.strictEqual(checkedInt,	false,	'Should return false if input is a function, but returned true.');
 
 		done();
 	});
@@ -26,7 +26,7 @@ describe('isInt', function() {
 		const	input	= 1.5,
 			checkedInt	= utils.isInt(input);
 
-		assert.deepEqual(checkedInt, false, 'Should return false if input is a float, but returned true.');
+		assert.strictEqual(checkedInt,	false,	'Should return false if input is a float, but returned true.');
 
 		done();
 	});
@@ -35,7 +35,7 @@ describe('isInt', function() {
 		const	input	= 1.0,
 			checkedInt	= utils.isInt(input);
 
-		assert.deepEqual(checkedInt, true, 'Should return true if input is a float with zero decimal, but returned false.');
+		assert.strictEqual(checkedInt,	true,	'Should return true if input is a float with zero decimal, but returned false.');
 
 		done();
 	});
@@ -44,7 +44,7 @@ describe('isInt', function() {
 		const	input	= 1,
 			checkedInt	= utils.isInt(input);
 
-		assert.deepEqual(checkedInt, true, 'Should return true if input is a int, but returned false.');
+		assert.strictEqual(checkedInt,	true,	'Should return true if input is a int, but returned false.');
 
 		done();
 	});

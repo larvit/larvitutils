@@ -8,7 +8,7 @@ describe('replaceAll', function() {
 		const	uuidStr	= 'f9684592-b245-42fa-88c6-9f16b9236ac3',
 			newStr	= utils.replaceAll('-', '_', uuidStr);
 
-		assert.deepEqual(newStr, 'f9684592_b245_42fa_88c6_9f16b9236ac3');
+		assert.strictEqual(newStr,	'f9684592_b245_42fa_88c6_9f16b9236ac3');
 
 		done();
 	});
@@ -17,7 +17,7 @@ describe('replaceAll', function() {
 		const	uuidStr	= 'f9684592b24542fa88c69f16b9236ac3',
 			newStr	= utils.replaceAll('-', '_', uuidStr);
 
-		assert.deepEqual(newStr, 'f9684592b24542fa88c69f16b9236ac3');
+		assert.strictEqual(newStr,	'f9684592b24542fa88c69f16b9236ac3');
 
 		done();
 	});
@@ -26,7 +26,7 @@ describe('replaceAll', function() {
 		const	uuidStr	= 'f9684592-b245-42fa-88c6-9f16b9236ac3',
 			newStr	= utils.replaceAll('-', '', uuidStr);
 
-		assert.deepEqual(newStr, 'f9684592b24542fa88c69f16b9236ac3');
+		assert.strictEqual(newStr,	'f9684592b24542fa88c69f16b9236ac3');
 
 		done();
 	});
@@ -35,7 +35,7 @@ describe('replaceAll', function() {
 		const	uuidStr	= 'f9684592-b245-42fa.88c6.9f16b9236ac3',
 			newStr	= utils.replaceAll('.', 'poo', uuidStr);
 
-		assert.deepEqual(newStr, 'f9684592-b245-42fapoo88c6poo9f16b9236ac3');
+		assert.strictEqual(newStr,	'f9684592-b245-42fapoo88c6poo9f16b9236ac3');
 
 		done();
 	});

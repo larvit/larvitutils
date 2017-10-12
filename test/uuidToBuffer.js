@@ -26,9 +26,9 @@ describe('uuidToBuffer', function() {
 	});
 
 	it('Should fail to convert a non-string', function(done) {
-		assert.deepEqual(utils.uuidToBuffer({'foo': 'bar'}),	false);
-		assert.deepEqual(utils.uuidToBuffer(undefined),	false);
-		assert.deepEqual(utils.uuidToBuffer(null),	false);
+		assert.strictEqual(utils.uuidToBuffer({'foo': 'bar'}),	false);
+		assert.strictEqual(utils.uuidToBuffer(undefined),	false);
+		assert.strictEqual(utils.uuidToBuffer(null),	false);
 
 		done();
 	});
