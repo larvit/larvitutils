@@ -1,7 +1,22 @@
 'use strict';
 
-const	topLogPrefix	 = 'larvitutils: index.js: ',
-	log	= require('winston');
+const	topLogPrefix	 = 'larvitutils: index.js: ';
+
+function Utils(options) {
+	const	that	= this;
+
+	if ( ! that) {
+		throw new Error('This library must be instanciated.');
+	}
+
+	that.options	= options || {};
+
+	if ( ! that.options.log) {
+		that.options.log	= new that.Log();
+	}
+
+	that.log	= that.options.log;
+}
 
 /**
  * Convert hrtime diff to milliseconds
@@ -10,19 +25,19 @@ const	topLogPrefix	 = 'larvitutils: index.js: ',
  * @param int precision - defaults to 2
  * @return string - time diff in milliseconds rounded to given precision
  */
-function hrtimeToMs(prevTime, precision) {
+Utils.prototype.hrtimeToMs = function hrtimeToMs(prevTime, precision) {
 	const	diff	= process.hrtime(prevTime);
 
 	if (precision === undefined) {
-		precision = 2;
+		precision	= 2;
 	}
 
 	return (diff[0] * 1000 + (diff[1] / 1000000)).toFixed(precision);
 };
 
-function escapeRegExp(str) {
+Utils.prototype.escapeRegExp = function escapeRegExp(str) {
 	return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
-}
+};
 
 /**
  * Formats an uuid string
@@ -31,11 +46,11 @@ function escapeRegExp(str) {
  * @param str uuidStr - Can also take a buffer
  * @return str uuid string or false on failure
  */
-function formatUuid(uuidStr) {
+Utils.prototype.formatUuid = function formatUuid(uuidStr) {
 
 	// If a buffer, get the string representation
 	if (Buffer.isBuffer(uuidStr)) {
-		uuidStr = uuidStr.toString('hex');
+		uuidStr	= uuidStr.toString('hex');
 	}
 
 	// Now uuidStr MUST be a string
@@ -44,7 +59,7 @@ function formatUuid(uuidStr) {
 	}
 
 	// Remove all but hex characters
-	uuidStr = uuidStr.replace(/[^A-Fa-f0-9]/g, '').toLowerCase();
+	uuidStr	= uuidStr.replace(/[^A-Fa-f0-9]/g, '').toLowerCase();
 
 	// All uuid strings have exactly 32 hex characters!
 	if (uuidStr.length !== 32) {
@@ -52,7 +67,7 @@ function formatUuid(uuidStr) {
 	}
 
 	// Add dashes in the right places
-	uuidStr = uuidStr.substring(0, 8) + '-' + uuidStr.substring(8, 12) + '-' + uuidStr.substring(12, 16) + '-' + uuidStr.substring(16, 20) + '-' + uuidStr.substring(20);
+	uuidStr	= uuidStr.substring(0, 8) + '-' + uuidStr.substring(8, 12) + '-' + uuidStr.substring(12, 16) + '-' + uuidStr.substring(16, 20) + '-' + uuidStr.substring(20);
 
 	return uuidStr;
 };
@@ -66,9 +81,10 @@ function formatUuid(uuidStr) {
  *
  * @return str
  */
-function replaceAll(search, replace, str) {
-	return str.replace(new RegExp(escapeRegExp(search), 'g'), replace);
-}
+Utils.prototype.replaceAll = function replaceAll(search, replace, str) {
+	const	that	= this;
+	return str.replace(new RegExp(that.escapeRegExp(search), 'g'), replace);
+};
 
 /**
  * Make a buffer from an uuid string
@@ -76,13 +92,14 @@ function replaceAll(search, replace, str) {
  * @param str uuidStr - Can be with or without dashes, padded spaces etc will be trimmed
  * @return buffer or false on fail
  */
-function uuidToBuffer(uuidStr) {
-	const	logPrefix	 = topLogPrefix + 'uuidToBuffer() - ';
+Utils.prototype.uuidToBuffer = function uuidToBuffer(uuidStr) {
+	const	logPrefix	= topLogPrefix + 'uuidToBuffer() - ',
+		that	= this;
 
 	if (typeof uuidStr !== 'string') {
 		const	stack	= new Error().stack;
-		log.warn(logPrefix + 'uuidStr is not a string, but a ' + (typeof uuidStr));
-		log.verbose(logPrefix + stack);
+		that.log.warn(logPrefix + 'uuidStr is not a string, but a ' + (typeof uuidStr));
+		that.log.verbose(logPrefix + stack);
 		return false;
 	}
 
@@ -92,8 +109,8 @@ function uuidToBuffer(uuidStr) {
 	// All uuid strings have exactly 32 hex characters!
 	if (uuidStr.length !== 32) {
 		const	stack	= new Error().stack;
-		log.warn(logPrefix + 'uuidStr should be exactly 32 characters after regex, but is: ' + uuidStr.length);
-		log.verbose(logPrefix + stack);
+		that.log.warn(logPrefix + 'uuidStr should be exactly 32 characters after regex, but is: ' + uuidStr.length);
+		that.log.verbose(logPrefix + stack);
 		return false;
 	}
 
@@ -106,19 +123,70 @@ function uuidToBuffer(uuidStr) {
  * @param	mixed	Value to check
  * @return	Boolean
  */
-function isInt(value) {
-	const x = parseFloat(value);
+Utils.prototype.isInt = function isInt(value) {
+	const	x	= parseFloat(value);
 
 	if (isNaN(value)) {
 		return false;
 	}
 
 	return (x | 0) === x;
-}
+};
 
-exports.formatUuid	= formatUuid;
-exports.hrtimeToMs	= hrtimeToMs;
-exports.instances	= {};
-exports.replaceAll	= replaceAll;
-exports.uuidToBuffer	= uuidToBuffer;
-exports.isInt = isInt;
+Utils.prototype.Log = function Log(options) {
+	const	that	= this;
+
+	that.options	= options || {};
+
+	if (typeof that.options === 'string') {
+		that.options	= {'level': that.options};
+	}
+
+	if ( ! that.options.level) {
+		that.options.level	= 'info';
+	}
+};
+
+Utils.prototype.Log.prototype.stdout = function stdout(lvl, msg) {
+	console.log((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
+};
+
+Utils.prototype.Log.prototype.stderr = function stderr(lvl, msg) {
+	console.error((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
+};
+
+Utils.prototype.Log.prototype.silly = function silly(msg) {
+	if (this.options.level === 'silly') this.stdout('sil', msg);
+};
+
+Utils.prototype.Log.prototype.debug = function debug(msg) {
+	if (['silly', 'debug'].indexOf(this.options.level) !== - 1) {
+		this.stdout('deb', msg);
+	}
+};
+
+Utils.prototype.Log.prototype.verbose = function verbose(msg) {
+	if (['silly', 'debug', 'verbose'].indexOf(this.options.level) !== - 1) {
+		this.stdout('ver', msg);
+	}
+};
+
+Utils.prototype.Log.prototype.info = function info(msg) {
+	if (['silly', 'debug', 'verbose', 'info'].indexOf(this.options.level) !== - 1) {
+		this.stdout('inf', msg);
+	}
+};
+
+Utils.prototype.Log.prototype.warn = function warn(msg) {
+	if (['silly', 'debug', 'verbose', 'info', 'warn'].indexOf(this.options.level) !== - 1) {
+		this.stderr('war', msg);
+	}
+};
+
+Utils.prototype.Log.prototype.error = function error(msg) {
+	if (['silly', 'debug', 'verbose', 'info', 'error'].indexOf(this.options.level) !== - 1) {
+		this.stderr('err', msg);
+	}
+};
+
+exports = module.exports = Utils;

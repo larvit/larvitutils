@@ -1,7 +1,7 @@
 'use strict';
 
 const	assert	= require('assert'),
-	utils	= require(__dirname + '/../index.js');
+	utils	= new (require(__dirname + '/../index.js'))();
 
 describe('replaceAll', function () {
 	it('Should replace all occurences of - to _ in an UUID', function (done) {

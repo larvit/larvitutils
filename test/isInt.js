@@ -1,7 +1,7 @@
 'use strict';
 
 const	assert	= require('assert'),
-	utils	= require(__dirname + '/../index.js');
+	utils	= new (require(__dirname + '/../index.js'))();
 
 describe('isInt', function () {
 	it('Should return false if input is a string', function (done) {

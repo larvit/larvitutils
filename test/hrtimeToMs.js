@@ -1,7 +1,7 @@
 'use strict';
 
 const	assert	= require('assert'),
-	utils	= require(__dirname + '/../index.js');
+	utils	= new (require(__dirname + '/../index.js'))();
 
 describe('hrtimeToMs', function () {
 	it('Test default amount of decimals', function (done) {

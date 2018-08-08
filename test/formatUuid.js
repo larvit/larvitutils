@@ -1,7 +1,7 @@
 'use strict';
 
 const	assert	= require('assert'),
-	utils	= require(__dirname + '/../index.js');
+	utils	= new (require(__dirname + '/../index.js'))();
 
 describe('formatUuid', function () {
 	it('Should convert a binary buffer to Uuid string', function (done) {

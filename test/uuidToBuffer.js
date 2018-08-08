@@ -1,10 +1,8 @@
 'use strict';
 
 const	assert	= require('assert'),
-	utils	= require(__dirname + '/../index.js'),
-	log	= require('winston');
-
-log.remove(log.transports.Console);
+	Utils	= require(__dirname + '/../index.js'),
+	utils	= new Utils({'log': new (new Utils()).Log('none')});
 
 describe('uuidToBuffer', function () {
 	it('Should convert an Uuid string to a buffer', function (done) {
