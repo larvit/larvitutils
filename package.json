@@ -4,8 +4,8 @@
   "description": "Misc utils",
   "main": "index.js",
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "mocha-eslint": "^4.1.0"
+    "mocha": "5.2.0",
+    "mocha-eslint": "4.1.0"
   },
   "scripts": {
     "test": "mocha"
