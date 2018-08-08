@@ -6,8 +6,8 @@ const	assert	= require('assert'),
 
 log.remove(log.transports.Console);
 
-describe('uuidToBuffer', function() {
-	it('Should convert an Uuid string to a buffer', function(done) {
+describe('uuidToBuffer', function () {
+	it('Should convert an Uuid string to a buffer', function (done) {
 		const	uuidStr	= 'f9684592-b245-42fa-88c6-9f16b9236ac3',
 			uuidBuf	= utils.uuidToBuffer(uuidStr);
 
@@ -16,7 +16,7 @@ describe('uuidToBuffer', function() {
 		done();
 	});
 
-	it('Should fail to convert an invalid Uuid string to buffer', function(done) {
+	it('Should fail to convert an invalid Uuid string to buffer', function (done) {
 		const	uuidStr	= 'f96845-42fa-88c6-9f16b9236ac3',
 			uuidBuf	= utils.uuidToBuffer(uuidStr);
 
@@ -25,7 +25,7 @@ describe('uuidToBuffer', function() {
 		done();
 	});
 
-	it('Should fail to convert a non-string', function(done) {
+	it('Should fail to convert a non-string', function (done) {
 		assert.strictEqual(utils.uuidToBuffer({'foo': 'bar'}),	false);
 		assert.strictEqual(utils.uuidToBuffer(undefined),	false);
 		assert.strictEqual(utils.uuidToBuffer(null),	false);
