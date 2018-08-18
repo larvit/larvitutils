@@ -5,7 +5,7 @@ const	assert	= require('assert'),
 
 describe('formatUuid', function () {
 	it('Should convert a binary buffer to Uuid string', function (done) {
-		const	uuid	= utils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
+		const	uuid	= utils.formatUuid(Buffer.from('f9684592b24542fa88c69f16b9236ac3', 'hex'));
 
 		assert.strictEqual(uuid,	'f9684592-b245-42fa-88c6-9f16b9236ac3');
 

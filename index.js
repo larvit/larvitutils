@@ -114,7 +114,7 @@ Utils.prototype.uuidToBuffer = function uuidToBuffer(uuidStr) {
 		return false;
 	}
 
-	return new Buffer(uuidStr, 'hex');
+	return new Buffer.from(uuidStr, 'hex');
 };
 
 /**
@@ -156,36 +156,36 @@ Utils.prototype.Log.prototype.stderr = function stderr(lvl, msg) {
 };
 
 Utils.prototype.Log.prototype.silly = function silly(msg) {
-	if (this.options.level === 'silly') this.stdout('sil', msg);
+	if (this.options.level === 'silly') this.stdout('\x1b[1;37msil\x1b[0m', msg);
 };
 
 Utils.prototype.Log.prototype.debug = function debug(msg) {
 	if (['silly', 'debug'].indexOf(this.options.level) !== - 1) {
-		this.stdout('deb', msg);
+		this.stdout('\x1b[1;35mdeb\x1b[0m', msg);
 	}
 };
 
 Utils.prototype.Log.prototype.verbose = function verbose(msg) {
 	if (['silly', 'debug', 'verbose'].indexOf(this.options.level) !== - 1) {
-		this.stdout('ver', msg);
+		this.stdout('\x1b[1;34mver\x1b[0m', msg);
 	}
 };
 
 Utils.prototype.Log.prototype.info = function info(msg) {
 	if (['silly', 'debug', 'verbose', 'info'].indexOf(this.options.level) !== - 1) {
-		this.stdout('inf', msg);
+		this.stdout('\x1b[1;32minf\x1b[0m', msg);
 	}
 };
 
 Utils.prototype.Log.prototype.warn = function warn(msg) {
 	if (['silly', 'debug', 'verbose', 'info', 'warn'].indexOf(this.options.level) !== - 1) {
-		this.stderr('war', msg);
+		this.stderr('\x1b[1;33mwar\x1b[0m', msg);
 	}
 };
 
 Utils.prototype.Log.prototype.error = function error(msg) {
 	if (['silly', 'debug', 'verbose', 'info', 'error'].indexOf(this.options.level) !== - 1) {
-		this.stderr('err', msg);
+		this.stderr('\x1b[1;31merr\x1b[0m', msg);
 	}
 };
 

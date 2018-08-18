@@ -18,7 +18,7 @@ describe('log', function () {
 
 		process.stdout.write	= oldStdout;
 
-		assert.strictEqual(outputMsg.substring(19),	'Z [inf] flurp\n');
+		assert.strictEqual(outputMsg.substring(19),	'Z [\u001b[1;32minf\u001b[0m] flurp\n');
 
 		done();
 	});
@@ -37,7 +37,7 @@ describe('log', function () {
 
 		process.stderr.write	= oldStderr;
 
-		assert.strictEqual(outputMsg.substring(19),	'Z [err] burp\n');
+		assert.strictEqual(outputMsg.substring(19),	'Z [\u001b[1;31merr\u001b[0m] burp\n');
 
 		done();
 	});
@@ -75,7 +75,7 @@ describe('log', function () {
 
 		process.stdout.write	= oldStdout;
 
-		assert.strictEqual(outputMsg.substring(19),	'Z [deb] wapp\n');
+		assert.strictEqual(outputMsg.substring(19),	'Z [\u001b[1;35mdeb\u001b[0m] wapp\n');
 
 		done();
 	});
