@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/larvit/larvitutils.svg)](https://travis-ci.org/larvit/larvitutils) [![Dependencies](https://david-dm.org/larvit/larvitutils.svg)](https://david-dm.org/larvit/larvitutils.svg)
+[![Build Status](https://travis-ci.org/larvit/larvitutils.svg)](https://travis-ci.org/larvit/larvitutils)
+[![Dependencies](https://david-dm.org/larvit/larvitutils.svg)](https://david-dm.org/larvit/larvitutils.svg)
+[![Coverage Status](https://coveralls.io/repos/github/larvit/larvitutils/badge.svg)](https://coveralls.io/github/larvit/larvitutils)
 
 # larvitutils
 
