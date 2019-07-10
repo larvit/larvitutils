@@ -3,19 +3,17 @@
 const topLogPrefix = 'larvitutils: index.js: ';
 
 function Utils(options) {
-	const that = this;
-
-	if (!that) {
+	if (!this) {
 		throw new Error('This library must be instanciated.');
 	}
 
-	that.options = options || {};
+	this.options = options || {};
 
-	if (!that.options.log) {
-		that.options.log = new that.Log();
+	if (!this.options.log) {
+		this.options.log = new this.Log();
 	}
 
-	that.log = that.options.log;
+	this.log = this.options.log;
 }
 
 /**
@@ -82,8 +80,7 @@ Utils.prototype.formatUuid = function formatUuid(uuidStr) {
  * @return {string} - The result
  */
 Utils.prototype.replaceAll = function replaceAll(search, replace, str) {
-	const that = this;
-	return str.replace(new RegExp(that.escapeRegExp(search), 'g'), replace);
+	return str.replace(new RegExp(this.escapeRegExp(search), 'g'), replace);
 };
 
 
@@ -141,17 +138,23 @@ Utils.prototype.isInt = function isInt(value) {
 	return (x | 0) === x;
 };
 
+/**
+ * Simple logging instance
+ *
+ * @param {object | string} options[=process.env.NODE_LOG_LVL] - Optional options object or minimum log level
+ * @param {string} options.level[=process.env.NODE_LOG_LVL] - log level
+ */
 Utils.prototype.Log = function Log(options) {
-	const that = this;
+	this.options = options || {};
 
-	that.options = options || {};
-
-	if (typeof that.options === 'string') {
-		that.options = {level: that.options};
+	if (typeof this.options === 'string') {
+		this.options = { level: this.options };
 	}
 
-	if (!that.options.level) {
-		that.options.level = 'info';
+	if (!this.options.level && process.env.NODE_LOG_LVL) {
+		this.options.level = process.env.NODE_LOG_LVL;
+	} else if (!this.options.level) {
+		this.options.level = 'info';
 	}
 };
 

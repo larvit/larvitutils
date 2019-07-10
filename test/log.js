@@ -1,82 +1,94 @@
 'use strict';
 
-const assert = require('assert');
+const test = require('tape');
 const utils = new (require(__dirname + '/../index.js'))();
 
-describe('log', function () {
-	it('should log to info', done => {
-		const oldStdout = process.stdout.write;
-		const log = new utils.Log();
+test('log - should log to info', t => {
+	const oldStdout = process.stdout.write;
+	const log = new utils.Log();
 
-		let	outputMsg;
+	let outputMsg;
 
-		process.stdout.write = function (msg) {
-			outputMsg = msg;
-		};
+	process.stdout.write = msg => outputMsg = msg;
 
-		log.info('flurp');
+	log.info('flurp');
 
-		process.stdout.write = oldStdout;
+	process.stdout.write = oldStdout;
 
-		assert.strictEqual(outputMsg.substring(19), 'Z [\u001b[1;32minf\u001b[0m] flurp\n');
+	t.equal(outputMsg.substring(19), 'Z [\u001b[1;32minf\u001b[0m] flurp\n');
 
-		done();
-	});
+	t.end();
+});
 
-	it('should log to error', done => {
-		const oldStderr = process.stderr.write;
-		const log = new utils.Log();
+test('log - should log to error', t => {
+	const oldStderr = process.stderr.write;
+	const log = new utils.Log();
 
-		let	outputMsg;
+	let outputMsg;
 
-		process.stderr.write = function (msg) {
-			outputMsg = msg;
-		};
+	process.stderr.write = msg => outputMsg = msg;
 
-		log.error('burp');
+	log.error('burp');
 
-		process.stderr.write = oldStderr;
+	process.stderr.write = oldStderr;
 
-		assert.strictEqual(outputMsg.substring(19), 'Z [\u001b[1;31merr\u001b[0m] burp\n');
+	t.equal(outputMsg.substring(19), 'Z [\u001b[1;31merr\u001b[0m] burp\n');
 
-		done();
-	});
+	t.end();
+});
 
-	it('should not print debug by default', done => {
-		const oldStdout = process.stdout.write;
-		const log = new utils.Log();
+test('log - should not print debug by default', t => {
+	const oldStdout = process.stdout.write;
+	const log = new utils.Log();
 
-		let	outputMsg = 'yay';
+	let outputMsg = 'yay';
 
-		process.stdout.write = function (msg) {
-			outputMsg = msg;
-		};
+	process.stdout.write = msg => outputMsg = msg;
 
-		log.debug('nai');
+	log.debug('nai');
 
-		process.stdout.write = oldStdout;
+	process.stdout.write = oldStdout;
 
-		assert.strictEqual(outputMsg, 'yay');
+	t.equal(outputMsg, 'yay');
 
-		done();
-	});
+	t.end();
+});
 
-	it('should print debug when given "silly" as level', done => {
-		const oldStdout = process.stdout.write;
-		const log = new utils.Log('silly');
+test('log - should print debug when given "silly" as level', t => {
+	const oldStdout = process.stdout.write;
+	const log = new utils.Log('silly');
 
-		let	outputMsg = 'woof';
+	let outputMsg = 'woof';
 
-		process.stdout.write = function (msg) {
-			outputMsg = msg;
-		};
+	process.stdout.write = msg => outputMsg = msg;
 
-		log.debug('wapp');
+	log.debug('wapp');
 
-		process.stdout.write = oldStdout;
+	process.stdout.write = oldStdout;
 
-		assert.strictEqual(outputMsg.substring(19), 'Z [\u001b[1;35mdeb\u001b[0m] wapp\n');
+	t.equal(outputMsg.substring(19), 'Z [\u001b[1;35mdeb\u001b[0m] wapp\n');
 
-		done();
-	});
+	t.end();
+});
+
+test('log - Use environment variable as default log level', t => {
+	const oldEnv = process.env.NODE_LOG_LVL;
+	const oldStdout = process.stdout.write;
+	let outputMsg = 'fail';
+
+	process.env.NODE_LOG_LVL = 'debug';
+
+	const log = new utils.Log();
+
+	process.stdout.write = msg => outputMsg = msg;
+
+	log.debug('tepp');
+
+	process.stdout.write = oldStdout;
+
+	process.env.NODE_LOG_LVL = oldEnv;
+
+	t.equal(outputMsg.substring(19), 'Z [\u001b[1;35mdeb\u001b[0m] tepp\n');
+
+	t.end();
 });

@@ -139,4 +139,6 @@ const log = new lUtils.Log('none');
 log.error('Hello'); // prints nothing
 ```
 
+The default log level can be changed by setting environment variable NODE_LOG_LVL
+
 All logging methods: silly, debug, verbose, info, warn and error.

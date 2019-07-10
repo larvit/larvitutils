@@ -1,42 +1,40 @@
 'use strict';
 
-const assert = require('assert');
+const test = require('tape');
 const utils = new (require(__dirname + '/../index.js'))();
 
-describe('replaceAll', function () {
-	it('Should replace all occurences of - to _ in an UUID', done => {
-		const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
-		const newStr = utils.replaceAll('-', '_', uuidStr);
+test('replaceAll() - Should replace all occurences of - to _ in an UUID', t => {
+	const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
+	const newStr = utils.replaceAll('-', '_', uuidStr);
 
-		assert.strictEqual(newStr, 'f9684592_b245_42fa_88c6_9f16b9236ac3');
+	t.equal(newStr, 'f9684592_b245_42fa_88c6_9f16b9236ac3');
 
-		done();
-	});
+	t.end();
+});
 
-	it('Should leave a string unaltered if it have no occurences of the string to be replaced', done => {
-		const uuidStr = 'f9684592b24542fa88c69f16b9236ac3';
-		const newStr = utils.replaceAll('-', '_', uuidStr);
+test('replaceAll() - Should leave a string unaltered if it have no occurences of the string to be replaced', t => {
+	const uuidStr = 'f9684592b24542fa88c69f16b9236ac3';
+	const newStr = utils.replaceAll('-', '_', uuidStr);
 
-		assert.strictEqual(newStr, 'f9684592b24542fa88c69f16b9236ac3');
+	t.equal(newStr, 'f9684592b24542fa88c69f16b9236ac3');
 
-		done();
-	});
+	t.end();
+});
 
-	it('Should be able to replace to nothing', done => {
-		const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
-		const newStr = utils.replaceAll('-', '', uuidStr);
+test('replaceAll() - Should be able to replace to nothing', t => {
+	const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
+	const newStr = utils.replaceAll('-', '', uuidStr);
 
-		assert.strictEqual(newStr, 'f9684592b24542fa88c69f16b9236ac3');
+	t.equal(newStr, 'f9684592b24542fa88c69f16b9236ac3');
 
-		done();
-	});
+	t.end();
+});
 
-	it('Should not break if we pass RegExp unsafe char', done => {
-		const uuidStr = 'f9684592-b245-42fa.88c6.9f16b9236ac3';
-		const newStr = utils.replaceAll('.', 'poo', uuidStr);
+test('replaceAll() - Should not break if we pass RegExp unsafe char', t => {
+	const uuidStr = 'f9684592-b245-42fa.88c6.9f16b9236ac3';
+	const newStr = utils.replaceAll('.', 'poo', uuidStr);
 
-		assert.strictEqual(newStr, 'f9684592-b245-42fapoo88c6poo9f16b9236ac3');
+	t.equal(newStr, 'f9684592-b245-42fapoo88c6poo9f16b9236ac3');
 
-		done();
-	});
+	t.end();
 });
