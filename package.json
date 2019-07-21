@@ -5,7 +5,7 @@
   "main": "index.js",
   "devDependencies": {
     "coveralls": "3.0.4",
-    "eslint": "6.0.1",
+    "eslint": "6.1.0",
     "nyc": "14.1.1",
     "tape": "4.11.0",
     "tape-eslint": "1.2.1"
