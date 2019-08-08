@@ -6,7 +6,7 @@
   "devDependencies": {
     "@types/node": "12.7.0",
     "@types/tape": "4.2.33",
-    "coveralls": "3.0.4",
+    "coveralls": "3.0.6",
     "nyc": "14.1.1",
     "tape": "4.11.0",
     "tape-eslint": "1.2.1",
