@@ -1,8 +1,11 @@
 {
   "name": "larvitutils",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Misc utils",
   "main": "build/index.js",
+  "files": [
+    "/build"
+  ],
   "devDependencies": {
     "@types/node": "12.7.1",
     "@types/tape": "4.2.33",
