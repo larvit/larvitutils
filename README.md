@@ -24,6 +24,14 @@ const log = winston.createLogger({'transports':[new winston.transprots.Console()
 const lUtils = new (require('larvitutils'))({log: log});
 ```
 
+## Changelog
+
+Very summarized, see specific commits for more details
+
+v3.0.0 - Rewrite to TypeScript, and the Log() now require exactly 'none' for no log output. Random strings will no longer be accepted
+
+v2.0.0 - Rewrite to all tings being instanciated
+
 ## Async setTimeout
 
 ```javascript

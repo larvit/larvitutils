@@ -1,7 +1,7 @@
-'use strict';
+import test from 'tape';
+import Utils from '../src/index';
 
-const test = require('tape');
-const utils = new (require(__dirname + '/../index.js'))();
+const utils = new Utils();
 
 test('replaceAll() - Should replace all occurences of - to _ in an UUID', t => {
 	const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';

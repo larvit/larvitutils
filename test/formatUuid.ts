@@ -1,7 +1,7 @@
-'use strict';
+import test from 'tape';
+import Utils from '../src/index';
 
-const test = require('tape');
-const utils = new (require(__dirname + '/../index.js'))();
+const utils = new Utils();
 
 test('formatuuid() - Should convert a binary buffer to Uuid string', t => {
 	const uuid = utils.formatUuid(Buffer.from('f9684592b24542fa88c69f16b9236ac3', 'hex'));
@@ -48,7 +48,9 @@ test('formatuuid() - Should format a upper case string to lower case', t => {
 });
 
 test('formatuuid() - Should fail on anything but a string', t => {
+	// @ts-ignore: invalid input format to formatUuid()
 	const test1 = utils.formatUuid([3, 4]);
+	// @ts-ignore: invalid input format to formatUuid()
 	const test2 = utils.formatUuid({höhö: 'fippel'});
 
 	t.equal(test1, false);

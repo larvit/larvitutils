@@ -1,7 +1,7 @@
-'use strict';
+import test from 'tape';
+import Utils from '../src/index';
 
-const test = require('tape');
-const utils = new (require(__dirname + '/../index.js'))();
+const utils = new Utils();
 
 test('hrtimeToMs() - Test default amount of decimals', t => {
 	const res = utils.hrtimeToMs(process.hrtime());

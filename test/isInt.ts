@@ -1,7 +1,7 @@
-'use strict';
+import test from 'tape';
+import Utils from '../src/index';
 
-const test = require('tape');
-const utils = new (require(__dirname + '/../index.js'))();
+const utils = new Utils();
 
 test('isInt() - Should return false if input is a string', t => {
 	const input = 'string';
@@ -13,7 +13,7 @@ test('isInt() - Should return false if input is a string', t => {
 });
 
 test('isInt() - Should return false if input is a function', t => {
-	function input() {};
+	function input() {/* */}
 	const checkedInt = utils.isInt(input);
 
 	t.equal(checkedInt, false, 'Should return false if input is a function, but returned true.');
