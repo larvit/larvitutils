@@ -28,6 +28,8 @@ const lUtils = new (require('larvitutils'))({log: log});
 
 Very summarized, see specific commits for more details
 
+v3.0.1 - Cleaned out files in the npm package that is not needed
+
 v3.0.0 - Rewrite to TypeScript, and the Log() now require exactly 'none' for no log output. Random strings will no longer be accepted
 
 v2.0.0 - Rewrite to all tings being instanciated

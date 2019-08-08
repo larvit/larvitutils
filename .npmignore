@@ -1,3 +1,9 @@
+.editorconfig
+.nyc_output
+.travis.yml
 coverage
+renovate.json
 src
 test
+tsconfig.json
+tslint.json
