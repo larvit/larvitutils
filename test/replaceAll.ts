@@ -1,5 +1,5 @@
 import test from 'tape';
-import Utils from '../src/index';
+import { Utils } from '../src/index';
 
 const utils = new Utils();
 
