@@ -18,7 +18,7 @@ export default class Log {
 	 * @param options[=process.env.NODE_LOG_LVL] - Optional options object or minimum log level
 	 * @param options.level[=process.env.NODE_LOG_LVL] - log level
 	 */
-	constructor(options: LogOptions | LogLevel | undefined) {
+	constructor(options?: LogOptions | LogLevel) {
 		const defaultLogLevel: LogLevel = this.getDefaultLogLevel();
 
 		if (this.isLogLevel(options)) {

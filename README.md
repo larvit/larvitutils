@@ -13,15 +13,17 @@ The library takes one parameter as option, "log". It is designed to take an inst
 Example of loading the library with no configured logger (using the default):
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { LUtils } = require('larvitutils');
+const lUtils = new LUtils();
 ```
 
 Example of loading the library with an instance of [winston](https://github.com/winstonjs/winston) as logger:
 
 ```javascript
 const winston = require('winston');
-const log = winston.createLogger({'transports':[new winston.transprots.Console()]});
-const lUtils = new (require('larvitutils'))({log: log});
+const log = winston.createLogger({ 'transports': [new winston.transprots.Console()] });
+const { LUtils } = require('larvitutils');
+const lUtils = new LUtils({ log });
 ```
 
 ## Changelog
@@ -37,7 +39,8 @@ v2.0.0 - Rewrite to all tings being instanciated
 ## Async setTimeout
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { LUtils } = require('larvitutils');
+const lUtils = new LUtils();
 await lUtils.setTimeout(1000);
 console.log('1000ms later');
 ```

@@ -1,11 +1,9 @@
 import test from 'tape';
-import Utils from '../src/index';
-
-const utils = new Utils();
+import { Log } from '../src/index';
 
 test('log - should log to info', t => {
 	const oldStdout = process.stdout.write;
-	const log = new utils.Log();
+	const log = new Log();
 
 	let outputMsg = '';
 
@@ -27,7 +25,7 @@ test('log - should log to info', t => {
 
 test('log - should log to error', t => {
 	const oldStderr = process.stderr.write;
-	const log = new utils.Log();
+	const log = new Log();
 
 	let outputMsg = '';
 
@@ -49,7 +47,7 @@ test('log - should log to error', t => {
 
 test('log - should not print debug by default', t => {
 	const oldStdout = process.stdout.write;
-	const log = new utils.Log();
+	const log = new Log();
 
 	let outputMsg = 'yay';
 
@@ -67,7 +65,7 @@ test('log - should not print debug by default', t => {
 
 test('log - should print debug when given "silly" as level', t => {
 	const oldStdout = process.stdout.write;
-	const log = new utils.Log('silly');
+	const log = new Log('silly');
 
 	let outputMsg = 'woof';
 
@@ -90,7 +88,7 @@ test('log - Use environment variable as default log level', t => {
 
 	process.env.NODE_LOG_LVL = 'debug';
 
-	const log = new utils.Log();
+	const log = new Log();
 
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stdout.write = msg => outputMsg = msg;
@@ -109,7 +107,7 @@ test('log - Use environment variable as default log level', t => {
 test('log - Print nothing, even on error, when no valid lvl is set', t => {
 	const oldStderr = process.stderr.write;
 	let outputMsg = 'SOMETHING';
-	const log = new utils.Log('none');
+	const log = new Log('none');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stderr.write = msg => outputMsg = msg;
 	log.error('kattbajs');
@@ -121,7 +119,7 @@ test('log - Print nothing, even on error, when no valid lvl is set', t => {
 test('log - Test silly', t => {
 	const oldStdout = process.stdout.write;
 	let outputMsg = '';
-	const log = new utils.Log('silly');
+	const log = new Log('silly');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stdout.write = msg => outputMsg = msg;
 	log.silly('kattbajs');
@@ -133,7 +131,7 @@ test('log - Test silly', t => {
 test('log - Test debug', t => {
 	const oldStdout = process.stdout.write;
 	let outputMsg = '';
-	const log = new utils.Log('debug');
+	const log = new Log('debug');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stdout.write = msg => outputMsg = msg;
 	log.debug('kattbajs');
@@ -145,7 +143,7 @@ test('log - Test debug', t => {
 test('log - Test verbose', t => {
 	const oldStdout = process.stdout.write;
 	let outputMsg = '';
-	const log = new utils.Log('verbose');
+	const log = new Log('verbose');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stdout.write = msg => outputMsg = msg;
 	log.verbose('kattbajs');
@@ -157,7 +155,7 @@ test('log - Test verbose', t => {
 test('log - Test info', t => {
 	const oldStdout = process.stdout.write;
 	let outputMsg = '';
-	const log = new utils.Log('info');
+	const log = new Log('info');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stdout.write = msg => outputMsg = msg;
 	log.info('kattbajs');
@@ -169,7 +167,7 @@ test('log - Test info', t => {
 test('log - Test warn', t => {
 	const oldStderr = process.stderr.write;
 	let outputMsg = '';
-	const log = new utils.Log('warn');
+	const log = new Log('warn');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stderr.write = msg => outputMsg = msg;
 	log.warn('kattbajs');
@@ -181,7 +179,7 @@ test('log - Test warn', t => {
 test('log - Test error', t => {
 	const oldStderr = process.stderr.write;
 	let outputMsg = '';
-	const log = new utils.Log('silly');
+	const log = new Log('silly');
 	// @ts-ignore: This works well, and is only for test purposes
 	process.stderr.write = msg => outputMsg = msg;
 	log.error('kattbajs');

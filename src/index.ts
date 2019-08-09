@@ -15,7 +15,7 @@ interface UtilsOptions {
 	log?: LogInstance;
 }
 
-export default class Utils {
+class Utils {
 	public Log: any = Log;
 	private options: UtilsOptions;
 	private log: LogInstance;
@@ -175,3 +175,5 @@ export default class Utils {
 		return false;
 	}
 }
+
+export { Utils, Log };
