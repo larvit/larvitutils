@@ -13,8 +13,8 @@ The library takes one parameter as option, "log". It is designed to take an inst
 Example of loading the library with no configured logger (using the default):
 
 ```javascript
-const { LUtils } = require('larvitutils');
-const lUtils = new LUtils();
+const { Utils } = require('larvitutils');
+const utils = new Utils();
 ```
 
 Example of loading the library with an instance of [winston](https://github.com/winstonjs/winston) as logger:
@@ -22,34 +22,33 @@ Example of loading the library with an instance of [winston](https://github.com/
 ```javascript
 const winston = require('winston');
 const log = winston.createLogger({ 'transports': [new winston.transprots.Console()] });
-const { LUtils } = require('larvitutils');
-const lUtils = new LUtils({ log });
+const { Utils } = require('larvitutils');
+const utils = new Utils({ log });
 ```
 
 ## Changelog
 
 Very summarized, see specific commits for more details
 
-v3.0.1 - Cleaned out files in the npm package that is not needed
-
-v3.0.0 - Rewrite to TypeScript, and the Log() now require exactly 'none' for no log output. Random strings will no longer be accepted
+v3.0.4 - Rewrite to TypeScript. Different initialization of the library (Log is no longer part of Utils). Log() now require exactly 'none' for no log output. Random strings will no longer be accepted.
 
 v2.0.0 - Rewrite to all tings being instanciated
 
 ## Async setTimeout
 
 ```javascript
-const { LUtils } = require('larvitutils');
-const lUtils = new LUtils();
-await lUtils.setTimeout(1000);
+const { Utils } = require('larvitutils');
+const utils = new Utils();
+await utils.setTimeout(1000);
 console.log('1000ms later');
 ```
 
 ## Convert a buffer to an Uuid
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
-const uuid = lUtils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
+const { Utils } = require('larvitutils');
+const utils = new Utils();
+const uuid = utils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
@@ -59,8 +58,9 @@ Example usecase: fetch a binary column from a database and convert to a readable
 ## Format a hex string to uuid
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
-const uuid = lUtils.formatUuid(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
+const { Utils } = require('larvitutils');
+const utils = new Utils();
+const uuid = utils.formatUuid(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
 
 console.log(uuid); // f9684592-b245-42fa-88c6-9f16b9236ac3
 ```
@@ -72,11 +72,12 @@ Used to convert hrtime() calls to milliseconds, since hrtime() output is messy (
 Usage:
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { Utils } = require('larvitutils');
+const utils = new Utils();
 const startTime = process.hrtime();
 
 setTimeout(function() {
-	console.log('benchmark took %d ms', lUtils.hrtimeToMs(startTime, 4));
+	console.log('benchmark took %d ms', utils.hrtimeToMs(startTime, 4));
  // benchmark took 34.0005 ms
 }, 34);
 ```
@@ -84,44 +85,48 @@ setTimeout(function() {
 ## Uuid string to buffer
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { Utils } = require('larvitutils');
+const utils = new Utils();
 const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 
-lUtils.uuidToBuffer(uuidStr); // Will return a buffer or false on failure
+utils.uuidToBuffer(uuidStr); // Will return a buffer or false on failure
 ```
 
 ## Replace all for strings
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { Utils } = require('larvitutils');
+const utils = new Utils();
 const str = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 
-lUtils.replaceAll('-', '_', str); // f9684592_b245_42fa_88c6_9f16b9236ac3
+utils.replaceAll('-', '_', str); // f9684592_b245_42fa_88c6_9f16b9236ac3
 ```
 
 ## Validate an uuid string
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { Utils } = require('larvitutils');
+const utils = new Utils();
 const validUuid = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 const invalidUuid1 = false;
 const invalidUuid2 = 'foobar';
 const invalidUuid3 = {höhö: 'oveboll'};
 
-lUtils.formatUuid(validUuid); // true
-lUtils.formatUuid(invalidUuid1); // false
-lUtils.formatUuid(invalidUuid2); // false
-lUtils.formatUuid(invalidUuid3); // false
+utils.formatUuid(validUuid); // true
+utils.formatUuid(invalidUuid1); // false
+utils.formatUuid(invalidUuid2); // false
+utils.formatUuid(invalidUuid3); // false
 ```
 
 ## Check if input is an int
 ```javascript
-const lUtils = new (require('larvitutils'))();
+const { Utils } = require('larvitutils');
+const utils = new Utils();
 
-lUtils.isInt(10); // true
-lUtils.isInt(10.0); // true
-lUtils.isInt(10.5); // false
-lUtils.isInt('oveboll'); // false
+utils.isInt(10); // true
+utils.isInt(10.0); // true
+utils.isInt(10.5); // false
+utils.isInt('oveboll'); // false
 ```
 
 ## Simple logger
@@ -129,8 +134,8 @@ lUtils.isInt('oveboll'); // false
 This is ment as a very simple replacement for winston
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
-const log = new lUtils.Log();
+const { Log } = require('larvitutils');
+const log = new Log();
 
 log.info('Hello'); // prints to stdout "2018-08-08T20:02:34Z [inf] Hello
 log.error('Hello'); // prints to stderr "2018-08-08T20:02:48Z [err] Hello
@@ -139,8 +144,8 @@ log.error('Hello'); // prints to stderr "2018-08-08T20:02:48Z [err] Hello
 By default only info, warn and error are printed to screen. Set minimum level by string, like this:
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
-const log = new lUtils.Log('debug');
+const { Log } = require('larvitutils');
+const log = new Log('debug');
 
 log.debug('Hello'); // prints to stdout "2018-08-08T20:02:34Z [deb] Debug
 ```
@@ -148,8 +153,8 @@ log.debug('Hello'); // prints to stdout "2018-08-08T20:02:34Z [deb] Debug
 Or disable output entirely
 
 ```javascript
-const lUtils = new (require('larvitutils'))();
-const log = new lUtils.Log('none');
+const { Log } = require('larvitutils');
+const log = new Log('none');
 
 log.error('Hello'); // prints nothing
 ```
