@@ -1,19 +1,19 @@
-import Log from './log';
+import { Log, LogLevel, LogOptions} from './log';
 
 const topLogPrefix = 'larvitutils: src/index.ts: ';
 
-interface LogInstance {
+type LogInstance = {
 	silly(msg: string): void;
 	debug(msg: string): void;
 	verbose(msg: string): void;
 	info(msg: string): void;
 	warn(msg: string): void;
 	error(msg: string): void;
-}
+};
 
-interface UtilsOptions {
+type UtilsOptions = {
 	log?: LogInstance;
-}
+};
 
 class Utils {
 	public Log: any = Log;
@@ -176,4 +176,4 @@ class Utils {
 	}
 }
 
-export { Utils, Log };
+export { Utils, UtilsOptions, Log, LogInstance, LogLevel, LogOptions };

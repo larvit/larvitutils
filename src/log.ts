@@ -8,7 +8,7 @@ type InternalLogOptions = {
 	level: LogLevel;
 };
 
-export default class Log {
+class Log {
 	private readonly validLogLevels = ['silly', 'debug', 'verbose', 'info', 'warn', 'error', 'none'];
 	private options: InternalLogOptions;
 
@@ -110,3 +110,5 @@ export default class Log {
 		return false;
 	}
 }
+
+export { Log, LogLevel, LogOptions };
