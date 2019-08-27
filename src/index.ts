@@ -2,6 +2,10 @@ import { Log, LogLevel, LogOptions} from './log';
 
 const topLogPrefix = 'larvitutils: src/index.ts: ';
 
+type KeyValues = {
+	[key: string]: string[];
+};
+
 type LogInstance = {
 	silly(msg: string): void;
 	debug(msg: string): void;
@@ -9,6 +13,10 @@ type LogInstance = {
 	info(msg: string): void;
 	warn(msg: string): void;
 	error(msg: string): void;
+};
+
+type UniqueKeyValues = {
+	[key: string]: string;
 };
 
 type UtilsOptions = {
@@ -28,6 +36,48 @@ class Utils {
 		} else {
 			this.log = this.options.log = new this.Log();
 		}
+	}
+
+	public getUniqueCombinations(keyValues: KeyValues): UniqueKeyValues[] {
+		const response: UniqueKeyValues[] = [];
+
+		function addUniqueCombination(curKeyVals: UniqueKeyValues, subKeyValues: KeyValues): void {
+			const workSubKeyValuesName = Object.keys(subKeyValues)[Object.keys(curKeyVals).length];
+			const workSubKeyValues = subKeyValues[workSubKeyValuesName];
+
+			// If this is the last key val to look for, loop through them all, add them and return them
+			if (Object.keys(curKeyVals).length === Object.keys(subKeyValues).length) {
+				response.push(curKeyVals);
+
+			// Loop through next key in line
+			} else {
+
+				for (let i = 0; workSubKeyValues.length !== i; i++) {
+					const nextKeyVal = Object.assign({}, curKeyVals);
+					const workSubKeyValue = workSubKeyValues[i];
+					nextKeyVal[workSubKeyValuesName] = workSubKeyValue;
+
+					addUniqueCombination(nextKeyVal, subKeyValues);
+				}
+			}
+		}
+
+		if (Object.keys(keyValues).length === 0) {
+			return response;
+		}
+
+		// Initiate the getter by calling addUniqueCombination() for each value on the first key
+		const firstKeyValuesName = Object.keys(keyValues)[0];
+		const firstKeyValues = keyValues[firstKeyValuesName];
+		for (let i = 0; firstKeyValues.length !== i; i++) {
+			const firstKeyValue = firstKeyValues[i];
+			const initKeyValList: UniqueKeyValues = {};
+			initKeyValList[firstKeyValuesName] = firstKeyValue;
+
+			addUniqueCombination(initKeyValList, keyValues);
+		}
+
+		return response;
 	}
 
 	/**

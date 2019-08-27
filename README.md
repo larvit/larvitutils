@@ -30,9 +30,37 @@ const utils = new Utils({ log });
 
 Very summarized, see specific commits for more details
 
+v3.2.0 - Added getUniqueCombinations()
+
 v3.0.4 - Rewrite to TypeScript. Different initialization of the library (Log is no longer part of Utils). Log() now require exactly 'none' for no log output. Random strings will no longer be accepted.
 
 v2.0.0 - Rewrite to all tings being instanciated
+
+## Get unique combinations
+
+Breaks up object with key-values to an array of all possible, unique key-values.
+
+Example:
+
+```javascript
+const { Utils } = require('larvitutils');
+const utils = new Utils();
+
+console.log(utils.getUniqueCombinations({
+	foo: ['bar', 'baz'],
+	buu: ['lenny', 'bosse']
+}));
+
+/*
+Outputs:
+[
+	{ "foo": "bar, "buu": "lenny" },
+	{ "foo": "bar, "buu": "bosse" },
+	{ "foo": "baz, "buu": "lenny" },
+	{ "foo": "baz, "buu": "bosse" },
+]
+*/
+```
 
 ## Async setTimeout
 
