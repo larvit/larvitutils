@@ -15,7 +15,7 @@
     "tape-eslint": "1.2.1",
     "ts-node": "8.3.0",
     "tslint": "5.18.0",
-    "typescript": "3.5.3"
+    "typescript": "3.6.2"
   },
   "scripts": {
     "build": "npm run lint && tsc",
