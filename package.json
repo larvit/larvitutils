@@ -7,7 +7,7 @@
     "/build"
   ],
   "devDependencies": {
-    "@types/node": "12.7.3",
+    "@types/node": "12.7.4",
     "@types/tape": "4.2.33",
     "coveralls": "3.0.6",
     "nyc": "14.1.1",
