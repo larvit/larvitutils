@@ -158,6 +158,23 @@ Utils.prototype.Log = function Log(options) {
 	}
 };
 
+/**
+ * Genereates a string into an unsigned int
+ *
+ * @param {string} str The string to convert
+ * @return {number} the hashed value
+ */
+Utils.prototype.hashUnsignedIntFromString = function hashUnsignedIntFromString(str) {
+	let hash = 0;
+
+	if (str.length === 0) return hash;
+	for (let i = 0; i < str.length; i++) {
+		hash += (1 << str.charCodeAt(i)) >>> 0;
+	}
+
+	return hash;
+};
+
 Utils.prototype.Log.prototype.stdout = function stdout(lvl, msg) {
 	console.log((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
 };
