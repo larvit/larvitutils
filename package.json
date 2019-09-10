@@ -1,6 +1,6 @@
 {
   "name": "larvitutils",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Misc utils",
   "main": "index.js",
   "devDependencies": {
