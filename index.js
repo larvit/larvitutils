@@ -159,20 +159,43 @@ Utils.prototype.Log = function Log(options) {
 };
 
 /**
- * Genereates a string into an unsigned int
+ * Hash string into another string (A-Z, 0-9)
  *
- * @param {string} str The string to convert
- * @return {number} the hashed value
+ * @param {string} str The string to hash
+ * @param {string} length Length of result string
+ * @return {string} The hashed result string
  */
-Utils.prototype.hashUnsignedIntFromString = function hashUnsignedIntFromString(str) {
-	let hash = 0;
+Utils.prototype.hashStringToString = function hashStringToString(str, length) {
+	if (length === 0) return '';
 
-	if (str.length === 0) return hash;
+	const base = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	const resultIndices = new Array(length);
+
+	// Generate an index salt so that similar input strings will give different result strings
+	let indexSalt = 0;
 	for (let i = 0; i < str.length; i++) {
-		hash += (1 << str.charCodeAt(i)) >>> 0;
+		indexSalt += (1 << str.charCodeAt(i)) >>> 0;
 	}
 
-	return hash;
+	if (str.length >= length) {
+		// Input string is longer or same length as desired result string length
+		for (let i = 0; i < str.length; ++i) {
+			const resultIndex = i % length;
+			const valueIndex = Math.abs(((resultIndices[resultIndex] ? resultIndices[resultIndex] : 0) + ((1 << str.charCodeAt(i))) + indexSalt + i) % base.length);
+			resultIndices[resultIndex] = valueIndex;
+		}
+	} else {
+		// Result string string is longer than the input string
+		for (let i = 0; i < resultIndices.length; ++i) {
+			const resultIndex = i;
+			const valueIndex = Math.abs((((1 << str.charCodeAt(i % str.length)) * i) + indexSalt) % base.length);
+			resultIndices[resultIndex] = valueIndex;
+		}
+	}
+
+	const result = resultIndices.map(x => base[x]).join('');
+
+	return result;
 };
 
 Utils.prototype.Log.prototype.stdout = function stdout(lvl, msg) {
