@@ -47,3 +47,11 @@ test('hashStringToString() - Hash string where all characters are the same shoul
 
 	t.end();
 });
+
+test('hashStringToString() - Two similar strings should not give the same hash (bug fixed so using exact strings that caused trouble here)', t => {
+	const str1 = 'L266' + '9560-13';
+	const str2 = 'L266' + '9500-13';
+
+	t.notEqual(utils.hashStringToString(str1, 6), utils.hashStringToString(str2, 6));
+	t.end();
+});
