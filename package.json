@@ -1,6 +1,6 @@
 {
   "name": "larvitutils",
-  "version": "4.0.0-beta3",
+  "version": "4.0.0-beta4",
   "description": "Misc utils",
   "type": "module",
   "main": "./dist/index.js",
@@ -19,7 +19,7 @@
     "typescript": "3.7.2"
   },
   "scripts": {
-    "build": "rm -rf ./dist/* && tsc -p ./tsconfig.dist.json",
+    "build": "rm -rf ./dist/* && tsc -p ./tsconfig.dist.json && cp ./src/models.d.ts ./dist/",
     "lint": "tslint ./src/* ./test/**/*.ts",
     "test": "npm run lint && npm run build && nyc --reporter=lcov --require ts-node/register tape test/**/*.ts | tap-spec; nyc report ---reporter=text"
   },
