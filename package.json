@@ -1,26 +1,27 @@
 {
   "name": "larvitutils",
-  "version": "3.2.1",
+  "version": "4.0.0-beta2",
   "description": "Misc utils",
-  "main": "build/index.js",
+  "type": "module",
+  "main": "./dist/index.js",
   "files": [
-    "/build"
+    "/dist"
   ],
   "devDependencies": {
-    "@types/node": "12.7.5",
+    "@types/node": "12.12.9",
     "@types/tape": "4.2.33",
-    "coveralls": "3.0.6",
+    "coveralls": "3.0.7",
     "nyc": "14.1.1",
-    "tap-spec": "^5.0.0",
+    "tap-spec": "5.0.0",
     "tape": "4.11.0",
-    "ts-node": "8.4.1",
+    "ts-node": "8.5.2",
     "tslint": "5.20.0",
-    "typescript": "3.6.3"
+    "typescript": "3.7.2"
   },
   "scripts": {
-    "build": "npm run lint && tsc",
-    "lint": "tslint ./src/* ./test/*",
-    "test": "npm run lint && npm run build && nyc --reporter=lcov --require ts-node/register tape test/**/*.{ts,js} | tap-spec; nyc report ---reporter=text"
+    "build": "rm -rf ./dist/* && tsc -p ./tsconfig.dist.json",
+    "lint": "tslint ./src/* ./test/**/*.ts",
+    "test": "npm run lint && npm run build && nyc --reporter=lcov --require ts-node/register tape test/**/*.ts | tap-spec; nyc report ---reporter=text"
   },
   "repository": {
     "type": "git",

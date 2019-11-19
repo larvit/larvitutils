@@ -4,13 +4,14 @@
 		"declaration": true,
 		"esModuleInterop": true,
 		"module": "commonjs",
+		"moduleResolution": "node",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
-		"outDir": "./build",
+		"outDir": "./dist",
 		"preserveSymlinks": true,
 		"strict": true,
-		"target": "es5"
+		"target": "es2019"
 	},
 	"include": [
 		"src/**/*"

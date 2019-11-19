@@ -6,6 +6,10 @@
 
 Misc utilities
 
+## Compability
+
+Since v4.x this library is ECMA script module only, no support for CommonJS.
+
 ## Loading of library
 
 The library takes one parameter as option, "log". It is designed to take an instance of [winston](https://github.com/winstonjs/winston), but more exactly it should be an object with the methods "silly", "debug", "verbose", "info", "warn" and "error". An example of this can be found in the VERY simplified logging utility built in to this library. See documentation below.
@@ -13,22 +17,24 @@ The library takes one parameter as option, "log". It is designed to take an inst
 Example of loading the library with no configured logger (using the default):
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 ```
 
 Example of loading the library with an instance of [winston](https://github.com/winstonjs/winston) as logger:
 
 ```javascript
-const winston = require('winston');
+import winston from 'winston';
+import { Utils } from 'larvitutils';
 const log = winston.createLogger({ 'transports': [new winston.transprots.Console()] });
-const { Utils } = require('larvitutils');
 const utils = new Utils({ log });
 ```
 
 ## Changelog
 
 Very summarized, see specific commits for more details
+
+v4.0.0 - ECMA Module distribution, dropped support for CommonJS
 
 v3.2.0 - Added getUniqueCombinations()
 
@@ -43,7 +49,7 @@ Breaks up object with key-values to an array of all possible, unique key-values.
 Example:
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 
 console.log(utils.getUniqueCombinations({
@@ -65,7 +71,7 @@ Outputs:
 ## Async setTimeout
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 await utils.setTimeout(1000);
 console.log('1000ms later');
@@ -74,7 +80,7 @@ console.log('1000ms later');
 ## Convert a buffer to an Uuid
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 const uuid = utils.formatUuid(new Buffer('f9684592b24542fa88c69f16b9236ac3', 'hex'));
 
@@ -86,7 +92,7 @@ Example usecase: fetch a binary column from a database and convert to a readable
 ## Format a hex string to uuid
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 const uuid = utils.formatUuid(' f9684592b24542fa88c69f16b9236ac3'); // Notice the starting space getting trimmed away
 
@@ -100,7 +106,7 @@ Used to convert hrtime() calls to milliseconds, since hrtime() output is messy (
 Usage:
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 const startTime = process.hrtime();
 
@@ -113,7 +119,7 @@ setTimeout(function() {
 ## Uuid string to buffer
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 const uuidStr = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 
@@ -123,7 +129,7 @@ utils.uuidToBuffer(uuidStr); // Will return a buffer or false on failure
 ## Replace all for strings
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 const str = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 
@@ -133,7 +139,7 @@ utils.replaceAll('-', '_', str); // f9684592_b245_42fa_88c6_9f16b9236ac3
 ## Validate an uuid string
 
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 const validUuid = 'f9684592-b245-42fa-88c6-9f16b9236ac3';
 const invalidUuid1 = false;
@@ -148,7 +154,7 @@ utils.formatUuid(invalidUuid3); // false
 
 ## Check if input is an int
 ```javascript
-const { Utils } = require('larvitutils');
+import { Utils } from 'larvitutils';
 const utils = new Utils();
 
 utils.isInt(10); // true
@@ -162,7 +168,7 @@ utils.isInt('oveboll'); // false
 This is ment as a very simple replacement for winston
 
 ```javascript
-const { Log } = require('larvitutils');
+import { Log } from 'larvitutils';
 const log = new Log();
 
 log.info('Hello'); // prints to stdout "2018-08-08T20:02:34Z [inf] Hello
@@ -172,7 +178,7 @@ log.error('Hello'); // prints to stderr "2018-08-08T20:02:48Z [err] Hello
 By default only info, warn and error are printed to screen. Set minimum level by string, like this:
 
 ```javascript
-const { Log } = require('larvitutils');
+import { Log } from 'larvitutils';
 const log = new Log('debug');
 
 log.debug('Hello'); // prints to stdout "2018-08-08T20:02:34Z [deb] Debug
@@ -181,7 +187,7 @@ log.debug('Hello'); // prints to stdout "2018-08-08T20:02:34Z [deb] Debug
 Or disable output entirely
 
 ```javascript
-const { Log } = require('larvitutils');
+import { Log } from 'larvitutils';
 const log = new Log('none');
 
 log.error('Hello'); // prints nothing
