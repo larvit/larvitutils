@@ -76,7 +76,9 @@ class Log {
 	}
 
 	private getDefaultLogLevel(): LogLevel {
-		if (this.validLogLevels.includes(process.env.NODE_LOG_LVL || '')) {
+		if (!process || !process.env || !process.env.NODE_LOG_LVL) {
+			return 'info';
+		} else if (this.validLogLevels.includes(process.env.NODE_LOG_LVL || '')) {
 			return process.env.NODE_LOG_LVL as LogLevel;
 		} else {
 			return 'info';

@@ -1,6 +1,6 @@
 {
   "name": "larvitutils",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Misc utils",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,9 +8,9 @@
     "/dist"
   ],
   "devDependencies": {
-    "@types/node": "12.12.11",
+    "@types/node": "12.12.14",
     "@types/tape": "4.2.33",
-    "coveralls": "3.0.7",
+    "coveralls": "3.0.8",
     "nyc": "14.1.1",
     "tap-spec": "5.0.0",
     "tape": "4.11.0",
