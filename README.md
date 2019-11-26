@@ -34,6 +34,8 @@ const utils = new Utils({ log });
 
 Very summarized, see specific commits for more details
 
+v4.0.2 - Even stricter control of process not being set for some environments
+
 v4.0.1 - Fixed bug where process.env.NODE_LOG_LVL was expected to be set in browsers if no log level was provided on instansiation
 
 v4.0.0 - ECMA Module distribution, dropped support for CommonJS
