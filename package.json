@@ -8,7 +8,7 @@
     "/dist"
   ],
   "devDependencies": {
-    "@types/node": "12.12.26",
+    "@types/node": "12.12.27",
     "@types/tape": "4.2.34",
     "coveralls": "3.0.9",
     "nyc": "14.1.1",
