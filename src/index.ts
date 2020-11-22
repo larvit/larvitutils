@@ -154,7 +154,7 @@ class Utils {
 
 	public async setTimeout(ms: number) {
 		return new Promise(resolve => {
-			setTimeout(() => resolve(), ms);
+			setTimeout(resolve, ms);
 		});
 	}
 
