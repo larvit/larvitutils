@@ -118,7 +118,7 @@ class Utils {
 		if (this.isLogInstance(this.options.log)) {
 			this.log = this.options.log;
 		} else {
-			this.log = this.options.log = new this.Log();
+			this.log = this.options.log = new Log();
 		}
 	}
 
@@ -182,7 +182,7 @@ class Utils {
 	}
 
 	public escapeRegExp(str: string): string {
-		return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+		return str.replace(/([.*+?^=!:${}()|[\]/\\])/g, '\\$1');
 	}
 
 	/**
@@ -236,7 +236,7 @@ class Utils {
 		return str.replace(new RegExp(this.escapeRegExp(search), 'g'), replace);
 	}
 
-	public async setTimeout(ms: number) {
+	public async setTimeout(ms: number): Promise<void> {
 		return new Promise(resolve => {
 			setTimeout(() => resolve(), ms);
 		});
@@ -288,7 +288,6 @@ class Utils {
 			return false;
 		}
 
-		// tslint:disable-next-line:no-bitwise
 		return (x | 0) === x;
 	}
 

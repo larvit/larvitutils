@@ -11,3 +11,4 @@ node_modules
 .lock-wscript
 .nyc_output
 build
+.vscode/

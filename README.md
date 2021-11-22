@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/larvit/larvitutils.svg)](https://travis-ci.org/larvit/larvitutils)
 [![Dependencies](https://david-dm.org/larvit/larvitutils.svg)](https://david-dm.org/larvit/larvitutils.svg)
-[![Coverage Status](https://coveralls.io/repos/github/larvit/larvitutils/badge.svg)](https://coveralls.io/github/larvit/larvitutils)
 
 # larvitutils
 
@@ -33,6 +32,8 @@ const utils = new Utils({ log });
 ## Changelog
 
 Very summarized, see specific commits for more details
+
+v5.0.0 - Updated dependency versions and fixed some TypeScript errors. Removed coveralls since it's dependent on deprecated packages.
 
 v4.0.2 - Even stricter control of process not being set for some environments
 

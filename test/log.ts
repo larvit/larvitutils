@@ -187,3 +187,69 @@ test('log - Test error', t => {
 	t.equal(outputMsg.substring(19), 'Z [\x1b[1;31merr\x1b[0m] kattbajs\n');
 	t.end();
 });
+
+test('log - Test initializing with options object', t => {
+	const oldStderr = process.stderr.write;
+	let outputMsg = '';
+	const log = new Log({ level: 'error' });
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stderr.write = msg => outputMsg = msg;
+	log.error('an error');
+	process.stderr.write = oldStderr;
+	t.equal(outputMsg.substring(19), 'Z [\x1b[1;31merr\x1b[0m] an error\n');
+	t.end();
+});
+
+test('log - Default level is info if nothing else is specified', t => {
+	const oldStdout = process.stdout.write;
+	let outputMsg = '';
+	const log = new Log({ level: undefined });
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stdout.write = msg => outputMsg = msg;
+	log.info('information');
+	process.stdout.write = oldStdout;
+	t.ok(outputMsg.includes(' information'));
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stdout.write = msg => outputMsg = msg;
+	log.verbose('not logged');
+	process.stdout.write = oldStdout;
+	t.notOk(outputMsg.includes(' not logged'));
+	t.end();
+});
+
+test('log - Test only errors are logged if log level is error', t => {
+	const oldStdout = process.stdout.write;
+	const oldStderr = process.stderr.write;
+	let outputMsg = '';
+	const log = new Log('error');
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stdout.write = msg => outputMsg = msg;
+	log.silly('kattbajs');
+	process.stdout.write = oldStdout;
+	t.equal(outputMsg.length, 0, 'Log level "silly" should not be logged');
+
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stdout.write = msg => outputMsg = msg;
+	log.debug('kattbajs');
+	process.stdout.write = oldStdout;
+	t.equal(outputMsg.length, 0, 'Log level "debug" should not be logged');
+
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stdout.write = msg => outputMsg = msg;
+	log.verbose('kattbajs');
+	process.stdout.write = oldStdout;
+	t.equal(outputMsg.length, 0, 'Log level "verbose" should not be logged');
+
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stderr.write = msg => outputMsg = msg;
+	log.warn('kattbajs');
+	process.stderr.write = oldStderr;
+	t.equal(outputMsg.length, 0, 'Log level "warn" should not be logged');
+
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stderr.write = msg => outputMsg = msg;
+	log.error('kattbajs');
+	process.stderr.write = oldStderr;
+	t.ok(outputMsg.includes(' kattbajs'), 'Log level "error" should be logged');
+	t.end();
+});

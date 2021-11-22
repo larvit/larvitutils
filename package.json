@@ -1,27 +1,26 @@
 {
   "name": "larvitutils",
-  "version": "4.0.2",
+  "version": "5.0.0",
   "description": "Misc utils",
-  "type": "module",
   "main": "./dist/index.js",
   "files": [
     "/dist"
   ],
   "devDependencies": {
-    "@types/node": "12.12.30",
-    "@types/tape": "4.2.34",
-    "coveralls": "3.0.11",
-    "nyc": "14.1.1",
-    "tap-spec": "5.0.0",
-    "tape": "4.13.2",
-    "ts-node": "8.8.1",
-    "tslint": "5.20.1",
-    "typescript": "3.8.3"
+    "@types/node": "16.11.9",
+    "@types/tape": "4.13.2",
+    "@typescript-eslint/eslint-plugin": "5.4.0",
+    "@typescript-eslint/parser": "5.4.0",
+    "eslint": "8.3.0",
+    "nyc": "15.1.0",
+    "tape": "5.3.2",
+    "ts-node": "10.4.0",
+    "typescript": "4.5.2"
   },
   "scripts": {
-    "build": "rm -rf ./dist/* && tsc -p ./tsconfig.dist.json && cp ./src/models.d.ts ./dist/",
-    "lint": "tslint ./src/* ./test/**/*.ts",
-    "test": "npm run lint && npm run build && nyc --reporter=lcov --require ts-node/register tape test/**/*.ts | tap-spec; nyc report ---reporter=text"
+    "build": "rm -rf ./dist/* && tsc && cp ./src/models.d.ts ./dist/",
+    "lint": "eslint ./src/* ./test/**/*.ts",
+    "test": "npm run lint && npm run build && ./node_modules/.bin/nyc ts-node -P ./tsconfig.json ./node_modules/tape/bin/tape test/**/*.ts"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Log = exports.Utils = void 0;
 const topLogPrefix = 'larvitutils: src/index.ts: ';
 class Log {
     /**
@@ -93,6 +96,7 @@ class Log {
         return false;
     }
 }
+exports.Log = Log;
 class Utils {
     constructor(options) {
         this.Log = Log;
@@ -101,7 +105,7 @@ class Utils {
             this.log = this.options.log;
         }
         else {
-            this.log = this.options.log = new this.Log();
+            this.log = this.options.log = new Log();
         }
     }
     getUniqueCombinations(keyValues) {
@@ -152,7 +156,7 @@ class Utils {
         return ((diff[0] * 1000) + (diff[1] / 1000000)).toFixed(precision);
     }
     escapeRegExp(str) {
-        return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+        return str.replace(/([.*+?^=!:${}()|[\]/\\])/g, '\\$1');
     }
     /**
      * Formats an uuid string
@@ -239,7 +243,6 @@ class Utils {
         if (isNaN(value)) {
             return false;
         }
-        // tslint:disable-next-line:no-bitwise
         return (x | 0) === x;
     }
     isLogInstance(logInstance) {
@@ -256,4 +259,4 @@ class Utils {
         return false;
     }
 }
-export { Utils, Log };
+exports.Utils = Utils;

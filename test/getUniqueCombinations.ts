@@ -3,6 +3,16 @@ import { Utils } from '../src/index';
 
 const utils = new Utils();
 
+test('getUniqueCombinations() - Empty result if input is empty object', t => {
+	const initObj = {};
+
+	const outObj = utils.getUniqueCombinations(initObj);
+
+	t.equal(outObj.length, 0, 'Zero unique combinations should exist');
+
+	t.end();
+});
+
 test('getUniqueCombinations() - Two dimensions, from example docs', t => {
 	const initObj = {
 		foo: ['bar', 'baz'],

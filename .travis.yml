@@ -3,10 +3,9 @@ language: node_js
 node_js:
   - 12
   - 13
+  - 14
 
 script: npm run test
-
-after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 notifications:
   email:

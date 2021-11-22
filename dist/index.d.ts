@@ -55,7 +55,7 @@ declare class Utils {
      * @return {string} The result
      */
     replaceAll(search: string, replace: string, str: string): string;
-    setTimeout(ms: number): Promise<unknown>;
+    setTimeout(ms: number): Promise<void>;
     /**
      * Make a buffer from an uuid string
      *
