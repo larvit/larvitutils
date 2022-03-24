@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/larvit/larvitutils.svg)](https://travis-ci.org/larvit/larvitutils)
-[![Dependencies](https://david-dm.org/larvit/larvitutils.svg)](https://david-dm.org/larvit/larvitutils.svg)
+[![Build Status](https://github.com/larvit/larvitutils/actions/workflows/ci.yml/badge.svg)](https://github.com/larvit/larvitutils/actions)
 
 # larvitutils
 
