@@ -1,6 +1,6 @@
 {
   "name": "larvitutils",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Misc utils",
   "main": "./dist/index.js",
   "files": [
