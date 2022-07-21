@@ -1,5 +1,14 @@
 
-import { InternalLogOptions, KeyValues, LogInstance, LogLevel, LogOptions, UniqueKeyValues, UtilsOptions } from './models';
+import {
+	InternalLogOptions,
+	KeyValues,
+	LogInstance,
+	LogLevel,
+	LogOptions,
+	Metadata,
+	UniqueKeyValues,
+	UtilsOptions
+} from './models';
 
 const topLogPrefix = 'larvitutils: src/index.ts: ';
 
@@ -29,49 +38,57 @@ class Log {
 		}
 	}
 
-	public stdout(lvl: string, msg: string) {
-		// tslint:disable-next-line:no-console
-		console.log((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
+	private frmtStr(lvl: string, msg: string, metadata?: Metadata) {
+		let str = `${(new Date()).toISOString().substring(0, 19)}Z [${lvl}] ${msg}`;
+		if (metadata) {
+			str += ` ${JSON.stringify(metadata)}`;
+		}
+		return str;
 	}
 
-	public stderr(lvl: string, msg: string) {
+	public stdout(lvl: string, msg: string, metadata?: Metadata) {
 		// tslint:disable-next-line:no-console
-		console.error((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
+		console.log(this.frmtStr(lvl, msg, metadata));
 	}
 
-	public silly(msg: string) {
+	public stderr(lvl: string, msg: string, metadata?: Metadata) {
+		// tslint:disable-next-line:no-console
+		console.error(this.frmtStr(lvl, msg, metadata));
+	}
+
+	public silly(msg: string, metadata?: Metadata) {
 		if (this.options.level === 'silly') {
-			this.stdout('\x1b[1;37msil\x1b[0m', msg);
+			this.stdout('\x1b[1;37msil\x1b[0m', msg, metadata);
 		}
 	}
 
-	public debug(msg: string) {
+	public debug(msg: string, metadata?: Metadata) {
 		if (['silly', 'debug'].includes(this.options.level)) {
-			this.stdout('\x1b[1;35mdeb\x1b[0m', msg);
+			this.stdout('\x1b[1;35mdeb\x1b[0m', msg, metadata);
 		}
 	}
 
-	public verbose(msg: string) {
+	public verbose(msg: string, metadata?: Metadata) {
 		if (['silly', 'debug', 'verbose'].includes(this.options.level)) {
-			this.stdout('\x1b[1;34mver\x1b[0m', msg);
+			this.stdout('\x1b[1;34mver\x1b[0m', msg, metadata);
 		}
 	}
 
-	public info(msg: string) {
+	public info(msg: string, metadata?: Metadata) {
 		if (['silly', 'debug', 'verbose', 'info'].includes(this.options.level)) {
-			this.stdout('\x1b[1;32minf\x1b[0m', msg);
+			this.stdout('\x1b[1;32minf\x1b[0m', msg, metadata);
 		}
 	}
 
-	public warn(msg: string) {
+	public warn(msg: string, metadata?: Metadata) {
 		if (['silly', 'debug', 'verbose', 'info', 'warn'].includes(this.options.level)) {
-			this.stderr('\x1b[1;33mwar\x1b[0m', msg);
+			this.stderr('\x1b[1;33mwar\x1b[0m', msg, metadata);
 		}
 	}
 
-	public error(msg: string) {
+	public error(msg: string, metadata?: Metadata) {
 		if (['silly', 'debug', 'verbose', 'info', 'warn', 'error'].includes(this.options.level)) {
-			this.stderr('\x1b[1;31merr\x1b[0m', msg);
+			this.stderr('\x1b[1;31merr\x1b[0m', msg, metadata);
 		}
 	}
 

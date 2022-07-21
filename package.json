@@ -1,16 +1,16 @@
 {
   "name": "larvitutils",
-  "version": "5.0.16",
+  "version": "5.1.0",
   "description": "Misc utils",
   "main": "./dist/index.js",
   "files": [
     "/dist"
   ],
   "devDependencies": {
-    "@types/node": "16.11.45",
+    "@types/node": "18.0.6",
     "@types/tape": "4.13.2",
-    "@typescript-eslint/eslint-plugin": "5.30.6",
-    "@typescript-eslint/parser": "5.30.6",
+    "@typescript-eslint/eslint-plugin": "5.30.7",
+    "@typescript-eslint/parser": "5.30.7",
     "eslint": "8.20.0",
     "nyc": "15.1.0",
     "tape": "5.5.3",

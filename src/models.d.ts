@@ -21,6 +21,10 @@ type LogOptions = {
 	level: LogLevel | undefined;
 };
 
+type Metadata = {
+	[key: string]: string | number | boolean
+}
+
 type UniqueKeyValues = {
 	[key: string]: string;
 };
@@ -29,4 +33,4 @@ type UtilsOptions = {
 	log?: LogInstance;
 };
 
-export { InternalLogOptions, KeyValues, LogInstance, LogLevel, LogOptions, UniqueKeyValues, UtilsOptions };
+export { InternalLogOptions, KeyValues, LogInstance, LogLevel, LogOptions, Metadata, UniqueKeyValues, UtilsOptions };

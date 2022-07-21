@@ -27,42 +27,49 @@ class Log {
             this.options = { level: defaultLogLevel };
         }
     }
-    stdout(lvl, msg) {
-        // tslint:disable-next-line:no-console
-        console.log((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
+    frmtStr(lvl, msg, metadata) {
+        let str = `${(new Date()).toISOString().substring(0, 19)}Z [${lvl}] ${msg}`;
+        if (metadata) {
+            str += ` ${JSON.stringify(metadata)}`;
+        }
+        return str;
     }
-    stderr(lvl, msg) {
+    stdout(lvl, msg, metadata) {
         // tslint:disable-next-line:no-console
-        console.error((new Date()).toISOString().substring(0, 19) + 'Z [' + lvl + '] ' + msg);
+        console.log(this.frmtStr(lvl, msg, metadata));
     }
-    silly(msg) {
+    stderr(lvl, msg, metadata) {
+        // tslint:disable-next-line:no-console
+        console.error(this.frmtStr(lvl, msg, metadata));
+    }
+    silly(msg, metadata) {
         if (this.options.level === 'silly') {
-            this.stdout('\x1b[1;37msil\x1b[0m', msg);
+            this.stdout('\x1b[1;37msil\x1b[0m', msg, metadata);
         }
     }
-    debug(msg) {
+    debug(msg, metadata) {
         if (['silly', 'debug'].includes(this.options.level)) {
-            this.stdout('\x1b[1;35mdeb\x1b[0m', msg);
+            this.stdout('\x1b[1;35mdeb\x1b[0m', msg, metadata);
         }
     }
-    verbose(msg) {
+    verbose(msg, metadata) {
         if (['silly', 'debug', 'verbose'].includes(this.options.level)) {
-            this.stdout('\x1b[1;34mver\x1b[0m', msg);
+            this.stdout('\x1b[1;34mver\x1b[0m', msg, metadata);
         }
     }
-    info(msg) {
+    info(msg, metadata) {
         if (['silly', 'debug', 'verbose', 'info'].includes(this.options.level)) {
-            this.stdout('\x1b[1;32minf\x1b[0m', msg);
+            this.stdout('\x1b[1;32minf\x1b[0m', msg, metadata);
         }
     }
-    warn(msg) {
+    warn(msg, metadata) {
         if (['silly', 'debug', 'verbose', 'info', 'warn'].includes(this.options.level)) {
-            this.stderr('\x1b[1;33mwar\x1b[0m', msg);
+            this.stderr('\x1b[1;33mwar\x1b[0m', msg, metadata);
         }
     }
-    error(msg) {
+    error(msg, metadata) {
         if (['silly', 'debug', 'verbose', 'info', 'warn', 'error'].includes(this.options.level)) {
-            this.stderr('\x1b[1;31merr\x1b[0m', msg);
+            this.stderr('\x1b[1;31merr\x1b[0m', msg, metadata);
         }
     }
     getDefaultLogLevel() {

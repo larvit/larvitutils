@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { KeyValues, LogInstance, LogLevel, LogOptions, UniqueKeyValues, UtilsOptions } from './models';
+import { KeyValues, LogInstance, LogLevel, LogOptions, Metadata, UniqueKeyValues, UtilsOptions } from './models';
 declare class Log {
     private readonly validLogLevels;
     private options;
@@ -10,14 +10,15 @@ declare class Log {
      * @param options.level[=process.env.NODE_LOG_LVL] - log level
      */
     constructor(options?: LogOptions | LogLevel);
-    stdout(lvl: string, msg: string): void;
-    stderr(lvl: string, msg: string): void;
-    silly(msg: string): void;
-    debug(msg: string): void;
-    verbose(msg: string): void;
-    info(msg: string): void;
-    warn(msg: string): void;
-    error(msg: string): void;
+    private frmtStr;
+    stdout(lvl: string, msg: string, metadata?: Metadata): void;
+    stderr(lvl: string, msg: string, metadata?: Metadata): void;
+    silly(msg: string, metadata?: Metadata): void;
+    debug(msg: string, metadata?: Metadata): void;
+    verbose(msg: string, metadata?: Metadata): void;
+    info(msg: string, metadata?: Metadata): void;
+    warn(msg: string, metadata?: Metadata): void;
+    error(msg: string, metadata?: Metadata): void;
     private getDefaultLogLevel;
     private optionsIsLogOptions;
     private isLogLevel;

@@ -253,3 +253,15 @@ test('log - Test only errors are logged if log level is error', t => {
 	t.ok(outputMsg.includes(' kattbajs'), 'Log level "error" should be logged');
 	t.end();
 });
+
+test('log - Test with metadata', t => {
+	const oldStdout = process.stdout.write;
+	let outputMsg = '';
+	const log = new Log('info');
+	// @ts-ignore: This works well, and is only for test purposes
+	process.stdout.write = msg => outputMsg = msg;
+	log.info('kattbajs', { foo: 'bar' });
+	process.stdout.write = oldStdout;
+	t.equal(outputMsg.split(' kattbajs ')[1].trim(), '{"foo":"bar"}', 'Metadata should be included in output');
+	t.end();
+});

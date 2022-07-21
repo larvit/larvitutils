@@ -175,7 +175,7 @@ This is ment as a very simple replacement for winston
 import { Log } from 'larvitutils';
 const log = new Log();
 
-log.info('Hello'); // prints to stdout "2018-08-08T20:02:34Z [inf] Hello
+log.info('Hello', { foo: 'bar' }); // prints to stdout "2018-08-08T20:02:34Z [inf] Hello {"foo":"bar}
 log.error('Hello'); // prints to stderr "2018-08-08T20:02:48Z [err] Hello
 ```
 
